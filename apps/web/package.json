@@ -1,0 +1,29 @@
+{
+  "name": "@app/web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "echo 'Le serveur de développement sera ajouté lors de l\u2019implémentation de l\u2019application web.'",
+    "build": "echo 'Build web en attente d\u2019implémentation.'",
+    "preview": "echo 'Preview web en attente d\u2019implémentation.'",
+    "lint": "pnpm run lint:stub",
+    "lint:stub": "echo 'Lint spécifique web à venir.'",
+    "typecheck": "echo 'Typecheck web à venir.'",
+    "test": "echo 'Tests unitaires web à venir.'"
+  },
+  "dependencies": {
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "i18next": "^25.6.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^16.1.0",
+    "three": "^0.163.0",
+    "zustand": "^4.5.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.10"
+  }
+}
