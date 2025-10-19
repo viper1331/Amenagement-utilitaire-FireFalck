@@ -1,7 +1,6 @@
 import type { ProjectContext } from '../project/context';
 import { quaternionFromEuler } from '../math/quaternion';
 import { vec3 } from '../math/vector';
-import { Buffer } from 'node:buffer';
 
 const positions = new Float32Array([
   -0.5, -0.5, -0.5,
@@ -23,7 +22,25 @@ const indices = new Uint16Array([
   0, 3, 7, 0, 7, 4,
 ]);
 
-const toBase64 = (data: Uint8Array): string => Buffer.from(data).toString('base64');
+const toBase64 = (data: Uint8Array): string => {
+  const globalRef = globalThis as {
+    btoa?: (data: string) => string;
+    Buffer?: { from(data: Uint8Array): { toString(encoding: string): string } };
+  };
+  if (typeof globalRef.btoa === 'function') {
+    let binary = '';
+    const chunkSize = 0x8000;
+    for (let offset = 0; offset < data.length; offset += chunkSize) {
+      const chunk = data.subarray(offset, offset + chunkSize);
+      binary += String.fromCharCode(...chunk);
+    }
+    return globalRef.btoa(binary);
+  }
+  if (globalRef.Buffer) {
+    return globalRef.Buffer.from(data).toString('base64');
+  }
+  throw new Error('No base64 encoder available in this environment');
+};
 
 const tupleToVector = (tuple: readonly [number, number, number]) => vec3(tuple[0], tuple[1], tuple[2]);
 
