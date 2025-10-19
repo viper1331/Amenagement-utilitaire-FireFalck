@@ -1,0 +1,34 @@
+{
+  "$schemaVersion": "1.0.0",
+  "id": "depollution_master_l2h2_etech_2025",
+  "label": "Dépollution – Renault Master E-Tech (L2H2) 2025",
+  "maker": "Renault",
+  "family": "Master E-Tech",
+  "variant": "L2H2 – Dépollution",
+  "year": 2025,
+  "fuel": "electric",
+  "gvw_kg": 3500,
+  "wheelbase_mm": 3585,
+  "overall": {
+    "length_mm": 5680,
+    "width_excl_mirrors_mm": 2081,
+    "height_mm": 2503
+  },
+  "interiorBox": {
+    "length_mm": 3083,
+    "width_mm": 1765,
+    "height_mm": 1885
+  },
+  "openings": {
+    "slidingDoor": { "width_mm": 1312, "height_mm": 1270 },
+    "rearDoor": { "width_mm": 1580, "height_mm": 1820, "openingAngle_deg": 270 }
+  },
+  "axles": [
+    { "index": 1, "x_mm": -1500, "maxLoad_kg": null },
+    { "index": 2, "x_mm": 1500, "maxLoad_kg": null }
+  ],
+  "forbiddenZones": [
+    { "id": "battery-pack-underfloor", "shape": "box", "origin_mm": [0, 0, -120], "size_mm": [1500, 1000, 240], "note": "Zone batterie sous plancher – pas de perçage" }
+  ],
+  "notes": "Profil dépol: appliquer contraintes VE; masses modules (pompes, absorbants) à suivre pour essieu AR."
+}

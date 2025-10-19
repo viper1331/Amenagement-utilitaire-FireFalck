@@ -1,0 +1,34 @@
+{
+  "name": "amenagement-utilitaire-firefalck",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=18.17"
+  },
+  "scripts": {
+    "setup": "pnpm install && pnpm run validate:data && pnpm --filter @app/web run build",
+    "lint": "pnpm recursive run lint",
+    "typecheck": "pnpm recursive run typecheck",
+    "test": "pnpm recursive run test",
+    "e2e": "pnpm --filter e2e run test",
+    "build": "pnpm recursive run build",
+    "preview": "pnpm --filter @app/web run preview",
+    "validate:data": "pnpm --filter @pkg/scripts run validate:data",
+    "fetch:assets": "pnpm --filter @pkg/scripts run fetch:assets"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "@typescript-eslint/eslint-plugin": "^7.8.0",
+    "@typescript-eslint/parser": "^7.8.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  }
+}

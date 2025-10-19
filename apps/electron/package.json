@@ -1,0 +1,18 @@
+{
+  "name": "@app/electron",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "dev": "pnpm run build && electron ./dist/main.js",
+    "start": "electron ./dist/main.js",
+    "lint": "eslint \"src/**/*.ts\"",
+    "typecheck": "tsc --project tsconfig.json --noEmit",
+    "fetch:electron-binaries": "echo 'Aucun binaire Electron stocké dans le dépôt.'"
+  },
+  "devDependencies": {
+    "electron": "^28.2.1",
+    "typescript": "^5.4.5"
+  }
+}
