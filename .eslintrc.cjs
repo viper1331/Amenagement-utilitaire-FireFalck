@@ -29,9 +29,10 @@ module.exports = {
         alwaysTryTypes: true,
       },
       node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       },
     },
+    'import/extensions': ['.js', '.jsx', '.ts', '.tsx', '.json'],
   },
   plugins: ['@typescript-eslint', 'react', 'react-hooks', 'jsx-a11y', 'import'],
   extends: [
