@@ -6,4 +6,6 @@ coverage/
 .env
 .vscode/
 .playwright/
+.e2e-artifacts/
+e2e/test-results/
 .pnpm-store/
