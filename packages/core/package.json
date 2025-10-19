@@ -5,13 +5,16 @@
   "main": "src/index.ts",
   "types": "src/index.ts",
   "scripts": {
-    "build": "echo 'Build core à implémenter.'",
-    "lint": "pnpm run lint:stub",
-    "lint:stub": "echo 'Lint core à venir.'",
-    "typecheck": "echo 'Typecheck core à venir.'",
-    "test": "vitest run --passWithNoTests"
+    "build": "tsc --project tsconfig.json --noEmit",
+    "lint": "eslint \"src/**/*.ts\"",
+    "typecheck": "tsc --project tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@pkg/data": "workspace:*"
   },
   "devDependencies": {
+    "typescript": "^5.4.5",
     "vitest": "^1.6.0"
   }
 }
