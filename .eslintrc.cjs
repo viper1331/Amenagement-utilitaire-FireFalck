@@ -19,6 +19,19 @@ module.exports = {
     react: {
       version: 'detect',
     },
+    'import/resolver': {
+      typescript: {
+        project: [
+          './tsconfig.base.json',
+          './packages/*/tsconfig.json',
+          './apps/*/tsconfig.json',
+        ],
+        alwaysTryTypes: true,
+      },
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    },
   },
   plugins: ['@typescript-eslint', 'react', 'react-hooks', 'jsx-a11y', 'import'],
   extends: [
@@ -35,6 +48,8 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'import/default': 'off',
+    'import/no-named-as-default-member': 'off',
   },
   ignorePatterns: ['dist', 'coverage', 'node_modules'],
 };
