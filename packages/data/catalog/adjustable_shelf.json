@@ -1,0 +1,12 @@
+{
+  "$schemaVersion": "1.0.0",
+  "sku": "MOD-SHELF-ADJUST",
+  "name": "Étagère réglable 3 niveaux",
+  "description": "Structure aluminium avec tablettes réglables par pas de 50 mm.",
+  "bbox_mm": { "length_mm": 1000, "width_mm": 400, "height_mm": 1600 },
+  "mass_kg": 35,
+  "clearances_mm": { "front_mm": 450 },
+  "mounting": { "type": "floor", "hardware": ["rail aluminium", "sangle de maintien"] },
+  "reachPriority": "med",
+  "tags": ["storage", "shelf", "adjustable"]
+}
