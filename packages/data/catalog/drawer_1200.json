@@ -1,0 +1,12 @@
+{
+  "$schemaVersion": "1.0.0",
+  "sku": "MOD-DRAWER-1200",
+  "name": "Tiroir coulissant 1200",
+  "description": "Tiroir lourd sortie 1200 mm pour matériel volumineux.",
+  "bbox_mm": { "length_mm": 1200, "width_mm": 600, "height_mm": 350 },
+  "mass_kg": 36,
+  "clearances_mm": { "front_mm": 1300, "top_mm": 80 },
+  "mounting": { "type": "floor", "hardware": ["rail telescopique", "renfort acier"], "notes": "Prévoir dégagement total" },
+  "reachPriority": "med",
+  "tags": ["storage", "drawer", "heavy-duty"]
+}

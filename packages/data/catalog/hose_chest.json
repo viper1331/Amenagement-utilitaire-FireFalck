@@ -1,0 +1,12 @@
+{
+  "$schemaVersion": "1.0.0",
+  "sku": "MOD-HOSE-CHEST",
+  "name": "Coffre tuyaux souples",
+  "description": "Coffre étanche pour tuyaux et division.",
+  "bbox_mm": { "length_mm": 900, "width_mm": 500, "height_mm": 500 },
+  "mass_kg": 29,
+  "clearances_mm": { "front_mm": 400, "top_mm": 200 },
+  "mounting": { "type": "floor", "hardware": ["cadre inox"], "notes": "Drainage arrière" },
+  "reachPriority": "med",
+  "tags": ["water", "hose", "sealed"]
+}
