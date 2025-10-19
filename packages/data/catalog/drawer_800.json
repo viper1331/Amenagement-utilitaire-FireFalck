@@ -1,0 +1,12 @@
+{
+  "$schemaVersion": "1.0.0",
+  "sku": "MOD-DRAWER-800",
+  "name": "Tiroir coulissant 800",
+  "description": "Tiroir médian pour consommables et outillage.",
+  "bbox_mm": { "length_mm": 800, "width_mm": 550, "height_mm": 280 },
+  "mass_kg": 24,
+  "clearances_mm": { "front_mm": 900 },
+  "mounting": { "type": "floor", "hardware": ["rail léger"], "notes": "Charge max 80 kg" },
+  "reachPriority": "med",
+  "tags": ["storage", "drawer", "consumables"]
+}

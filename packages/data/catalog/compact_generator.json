@@ -1,0 +1,12 @@
+{
+  "$schemaVersion": "1.0.0",
+  "sku": "MOD-GEN-COMPACT",
+  "name": "Groupe électrogène compact",
+  "description": "Groupe 5 kVA encapsulé, ventilation latérale.",
+  "bbox_mm": { "length_mm": 800, "width_mm": 520, "height_mm": 720 },
+  "mass_kg": 68,
+  "clearances_mm": { "front_mm": 300, "rear_mm": 300, "left_mm": 150, "right_mm": 150 },
+  "mounting": { "type": "floor", "hardware": ["silentbloc", "liaison cuivre"], "notes": "Prévoir sortie échappement" },
+  "reachPriority": "low",
+  "tags": ["power", "generator", "heavy"]
+}
