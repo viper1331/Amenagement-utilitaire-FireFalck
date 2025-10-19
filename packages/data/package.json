@@ -1,0 +1,17 @@
+{
+  "name": "@pkg/data",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "echo 'Build data à implémenter.'",
+    "lint": "pnpm run lint:stub",
+    "lint:stub": "echo 'Lint data à venir.'",
+    "typecheck": "echo 'Typecheck data à venir.'",
+    "test": "echo 'Tests data à venir.'"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}

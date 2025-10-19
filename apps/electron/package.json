@@ -1,0 +1,14 @@
+{
+  "name": "@app/electron",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Build Electron à implémenter.'",
+    "dev": "echo 'Dev Electron à implémenter.'",
+    "fetch:electron-binaries": "echo 'Aucun binaire Electron stocké dans le dépôt.'"
+  },
+  "devDependencies": {
+    "electron": "^28.2.1",
+    "typescript": "^5.4.5"
+  }
+}
