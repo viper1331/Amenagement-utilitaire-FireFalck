@@ -1,8 +1,9 @@
 # Aménagement utilitaire FireFalck
 
-Ce dépôt monorepo héberge le configurateur 3D de véhicules pompiers FireFalck. Cette première étape
-de mise en place installe l’infrastructure commune (pnpm workspace, linting, tests, documentation) qui
-servira de base aux développements fonctionnels ultérieurs.
+Ce dépôt monorepo héberge le configurateur 3D de véhicules pompiers FireFalck. Les premières briques
+sont désormais en place : infrastructure pnpm, jeux de données châssis normalisés et catalogue
+modules validés par Zod/JSON Schema, ainsi qu’un projet d’exemple immédiatement exploitable pour les
+tests à venir.
 
 ## Structure du dépôt
 
@@ -17,6 +18,8 @@ servira de base aux développements fonctionnels ultérieurs.
 
 1. Installer pnpm (`npm install -g pnpm`).
 2. Installer les dépendances : `pnpm install`.
-3. Vérifier l’infrastructure : `pnpm lint`, `pnpm test` (stub pour le moment).
+3. Valider les données : `pnpm run validate:data` génère les JSON Schema et vérifie véhicules/modules.
+4. Lancer les tests unitaires actuels : `pnpm test` (inclut les tests de cohérence des schémas).
 
-Les étapes suivantes apporteront l’application web, les données, le moteur métier et les tests complets.
+Les prochaines étapes introduiront le moteur métier, la scène 3D et les scénarios E2E. Les données et
+schémas publiés ici servent de base contractuelle pour ces développements.

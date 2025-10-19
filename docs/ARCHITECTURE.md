@@ -8,8 +8,8 @@ Cette documentation décrit la structure globale du monorepo. Elle sera complét
 - **apps/electron** : Wrapper Electron optionnel pour usage desktop.
 - **packages/core** : Moteur métier (collisions, règles, exports).
 - **packages/ui** : Bibliothèque de composants UI réutilisables.
-- **packages/data** : Schémas de données et catalogues normalisés.
-- **packages/scripts** : Scripts Node.js pour la validation et la génération d’assets.
+- **packages/data** : Schémas Zod + JSON Schema, véhicules normalisés et catalogue modules.
+- **packages/scripts** : Scripts Node.js (validation des données, génération d’artefacts SVG/JSON).
 - **e2e** : Tests Playwright orchestrant des scénarios utilisateur clés.
 
 ## Flux de développement
@@ -18,4 +18,12 @@ Cette documentation décrit la structure globale du monorepo. Elle sera complét
 2. Les apps consomment ces packages via pnpm workspaces.
 3. Les pipelines CI exécutent linting, type-check, tests unitaires et E2E, puis la construction de la PWA.
 
-Des diagrammes détaillés et la modélisation des flux seront ajoutés lors de l’implémentation des fonctionnalités.
+## Packages déjà activés
+
+- `packages/data` charge l’ensemble des fichiers JSON depuis `packages/data/vehicles` et `packages/data/catalog`,
+  expose les tableaux typés (`vehicleBlueprints`, `equipmentCatalog`) et génère les JSON Schema
+  correspondants dans `packages/data/json-schema` via le script `pnpm run validate:data`.
+- `packages/scripts` fournit la commande `validate:data` qui s’assure de la conformité des données,
+  synchronise les exports TypeScript et garantit la validité du projet d’exemple.
+
+Les diagrammes détaillés et la modélisation des flux seront ajoutés lors de l’implémentation des fonctionnalités.
