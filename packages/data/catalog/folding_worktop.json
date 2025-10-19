@@ -1,0 +1,12 @@
+{
+  "$schemaVersion": "1.0.0",
+  "sku": "MOD-WORKTOP-FOLD",
+  "name": "Plan de travail repliable",
+  "description": "Plan rabattable aluminium avec pied escamotable.",
+  "bbox_mm": { "length_mm": 1100, "width_mm": 500, "height_mm": 80 },
+  "mass_kg": 14,
+  "clearances_mm": { "front_mm": 700, "bottom_mm": 400 },
+  "mounting": { "type": "wall", "hardware": ["charnière renforcée", "verrou quart de tour"], "notes": "Maintenir zone libre repli" },
+  "reachPriority": "med",
+  "tags": ["worktop", "folding", "support"]
+}

@@ -1,0 +1,34 @@
+{
+  "$schemaVersion": "1.0.0",
+  "id": "vsav_master_l2h2_etech_2025",
+  "label": "VSAV – Renault Master E-Tech (L2H2) 2025",
+  "maker": "Renault",
+  "family": "Master E-Tech",
+  "variant": "L2H2",
+  "year": 2025,
+  "fuel": "electric",
+  "gvw_kg": 3500,
+  "wheelbase_mm": 3585,
+  "overall": {
+    "length_mm": 5680,
+    "width_excl_mirrors_mm": 2081,
+    "width_incl_mirrors_mm": 2466,
+    "height_mm": 2503,
+    "ground_clearance_mm": 188
+  },
+  "interiorBox": {
+    "length_mm": 3083,
+    "width_mm": 1765,
+    "height_mm": 1885
+  },
+  "openings": {
+    "slidingDoor": { "width_mm": 1312, "height_mm": 1270 },
+    "rearDoor": { "width_mm": 1580, "height_mm": 1820, "openingAngle_deg": 270 }
+  },
+  "axles": [
+    { "index": 1, "x_mm": -1500, "maxLoad_kg": null },
+    { "index": 2, "x_mm": 1500, "maxLoad_kg": null }
+  ],
+  "forbiddenZones": [],
+  "notes": "Dimensions de série L2H2; hauteur intérieure indicative VSAV suivant carrossier."
+}

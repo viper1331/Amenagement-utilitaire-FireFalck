@@ -1,0 +1,12 @@
+{
+  "$schemaVersion": "1.0.0",
+  "sku": "MOD-LADDER-INTERNAL",
+  "name": "Support échelle interne",
+  "description": "Support latéral pour échelle repliée, sangles rapides.",
+  "bbox_mm": { "length_mm": 2100, "width_mm": 180, "height_mm": 420 },
+  "mass_kg": 21,
+  "clearances_mm": { "front_mm": 150, "top_mm": 150 },
+  "mounting": { "type": "wall", "hardware": ["sangle rapide", "pattes inox"], "notes": "Maintenir à 300 mm du plafond" },
+  "reachPriority": "low",
+  "tags": ["ladder", "long", "wall"]
+}
