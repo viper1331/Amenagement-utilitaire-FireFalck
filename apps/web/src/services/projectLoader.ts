@@ -16,7 +16,7 @@ export const downloadProjectFile = (project: Project): void => {
   const url = URL.createObjectURL(blob);
   const anchor = document.createElement('a');
   anchor.href = url;
-  anchor.download = `${project.id}.fpvproj.json`;
+  anchor.download = `${project.id}.fpvproj`;
   document.body.appendChild(anchor);
   anchor.click();
   document.body.removeChild(anchor);

@@ -96,6 +96,8 @@ const resources = {
       'toast.moduleUnlocked': 'Module déverrouillé',
       'toast.measureStarted': 'Mode mesure actif',
       'toast.measureCleared': 'Mesures effacées',
+      'toast.electronImported': 'Projet chargé depuis Electron: {{filePath}}',
+      'toast.electronImportFailed': 'Échec ouverture Electron: {{filePath}}',
     },
   },
   en: {
@@ -191,6 +193,8 @@ const resources = {
       'toast.moduleUnlocked': 'Module unlocked',
       'toast.measureStarted': 'Measure mode enabled',
       'toast.measureCleared': 'Measurements cleared',
+      'toast.electronImported': 'Project loaded from Electron: {{filePath}}',
+      'toast.electronImportFailed': 'Electron failed to open: {{filePath}}',
     },
   },
 } as const;

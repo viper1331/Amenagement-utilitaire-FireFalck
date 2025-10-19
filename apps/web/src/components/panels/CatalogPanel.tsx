@@ -101,6 +101,8 @@ export const CatalogPanel: React.FC = () => {
               onDragStart={handleDragStart(module)}
               draggable
               icon={<span>{module.sku.slice(-3)}</span>}
+              data-module-sku={module.sku}
+              data-testid={`catalog-item-${module.sku.toLowerCase()}`}
             />
           ))}
         </ListSection>

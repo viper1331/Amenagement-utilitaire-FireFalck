@@ -465,5 +465,12 @@ export const useEditorStore = create<EditorState>((set, get) => ({
   markAutosaved: () => set({ lastAutosave: Date.now() }),
 }));
 
+if (typeof window !== 'undefined') {
+  const globalWindow = window as typeof window & { __EDITOR_STORE__?: typeof useEditorStore };
+  if (!globalWindow.__EDITOR_STORE__) {
+    globalWindow.__EDITOR_STORE__ = useEditorStore;
+  }
+}
+
 export const useEditorStoreSelector = <T,>(selector: (state: EditorState) => T): T =>
   useEditorStore(selector);

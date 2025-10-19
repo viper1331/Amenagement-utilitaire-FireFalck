@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef } from 'react';
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { TransformControls } from 'three/examples/jsm/controls/TransformControls.js';
-import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
+import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
 import type { EquipmentModule } from '@pkg/data';
 import { useEditorStore } from '../../state/useEditorStore';
 
@@ -158,7 +158,7 @@ export const SceneCanvas: React.FC = () => {
     const initialRotationSnap = currentProject?.settings.snap.rotation_deg ?? 5;
     transformControls.setTranslationSnap(initialSnap);
     transformControls.setRotationSnap(toRadians(initialRotationSnap));
-    transformControls.addEventListener('dragging-changed', (event) => {
+    transformControls.addEventListener('dragging-changed', (event: THREE.Event & { value?: boolean }) => {
       orbitControls.enabled = !event.value;
       if (!event.value) {
         const object = transformControls.object as THREE.Mesh | null;
@@ -430,7 +430,15 @@ export const SceneCanvas: React.FC = () => {
     event.preventDefault();
   };
 
-  return <div ref={containerRef} onDrop={handleDrop} onDragOver={handleDragOver} className="scene-canvas" />;
+  return (
+    <div
+      ref={containerRef}
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
+      className="scene-canvas"
+      data-testid="scene-canvas"
+    />
+  );
 };
 
 const extractPlacementTransform = (mesh: THREE.Mesh, module: EquipmentModule) => {

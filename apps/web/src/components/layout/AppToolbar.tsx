@@ -114,7 +114,7 @@ export const AppToolbar: React.FC = () => {
               ref={fileInputRef}
               className="visually-hidden"
               type="file"
-              accept="application/json"
+              accept=".json,.fpvproj,application/json"
               onChange={handleFileChange}
             />
           </div>
@@ -124,6 +124,7 @@ export const AppToolbar: React.FC = () => {
             <span className="language-selector">
               <IconLanguage />
               <select
+                data-testid="language-select"
                 value={project?.settings.language ?? 'fr'}
                 onChange={(event) => setLanguage(event.target.value as 'fr' | 'en')}
               >
@@ -191,9 +192,9 @@ export const AppToolbar: React.FC = () => {
               ))}
             </select>
           </span>
-          <span className="language-selector">
-            {t('legend.units')}
-            <select value={lengthUnit} onChange={handleUnitChange}>
+            <span className="language-selector">
+              {t('legend.units')}
+              <select value={lengthUnit} onChange={handleUnitChange}>
               <option value="mm">{t('toolbar.units.mm')}</option>
               <option value="in">{t('toolbar.units.in')}</option>
             </select>

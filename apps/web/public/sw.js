@@ -2,6 +2,10 @@ const CACHE_NAME = 'firefalck-cache-v1';
 const ASSETS = [
   '/',
   '/manifest.webmanifest',
+  '/sw.js',
+  '/examples/demo_project.json',
+  '/icons/icon-192.svg',
+  '/icons/icon-512.svg',
 ];
 
 self.addEventListener('install', (event) => {

@@ -7,6 +7,7 @@ import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 import { useServiceWorker } from './hooks/useServiceWorker';
 import { useProjectBootstrap } from './hooks/useProjectBootstrap';
 import { useI18nSync } from './hooks/useI18nSync';
+import { useElectronBridge } from './hooks/useElectronBridge';
 import { AppToolbar } from './components/layout/AppToolbar';
 import { CatalogPanel } from './components/panels/CatalogPanel';
 import { PropertiesPanel } from './components/panels/PropertiesPanel';
@@ -55,6 +56,7 @@ const AppContent: React.FC = () => {
   useAutosave();
   useKeyboardShortcuts();
   useI18nSync();
+  useElectronBridge();
   const { loading, error } = useProjectBootstrap();
 
   if (loading) {

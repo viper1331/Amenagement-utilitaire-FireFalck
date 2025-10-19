@@ -11,34 +11,46 @@
 pnpm install
 ```
 
+Ensuite :
+
+```bash
+pnpm -w run setup
+```
+
+Cette commande vérifie les données (`validate:data`) puis construit la PWA (`@app/web build`).
+
 ## Scripts pnpm
 
-- `pnpm -w run setup` — Installe les dépendances, exécute la validation des données et prépare la build web.
-- `pnpm -w run lint` — Exécute ESLint sur l’ensemble des packages.
-- `pnpm -w run typecheck` — Lancement des vérifications TypeScript.
-- `pnpm -w run test` — Tests unitaires (Vitest) agrégés.
-- `pnpm -w run e2e` — Tests end-to-end Playwright.
-- `pnpm -w run build` — Construction des artefacts.
-- `pnpm -w run preview` — Prévisualisation de la PWA (sera implémenté).
-- `pnpm -w run fetch:assets` — Téléchargement ou génération d’assets (no-op tant que non implémenté).
+- `pnpm --filter @app/web dev` — serveur Vite (http://localhost:5173).
+- `pnpm --filter @app/web build` — build PWA (Vite).
+- `pnpm --filter @app/web preview` — prévisualisation du build.
+- `pnpm --filter @app/electron build` — compilation du wrapper Electron (TypeScript → `apps/electron/dist`).
+- `pnpm --filter @app/electron start` — lance Electron sur le build web.
+- `pnpm lint` / `pnpm typecheck` / `pnpm test` — qualité globale.
+- `pnpm e2e` — scénarios Playwright (le serveur Vite est démarré automatiquement).
+- `pnpm --filter @pkg/scripts run validate:data` — contrôle des JSON + régénération des JSON Schema.
 
-## Roadmap technique
+## Développer sur Electron
 
-Les étapes suivantes introduiront :
+1. Construire la PWA (`pnpm --filter @app/web build`).
+2. Compiler l’app (`pnpm --filter @app/electron build`).
+3. Lancer en local (`pnpm --filter @app/electron start`).
+4. Les fichiers `.fpvproj` peuvent être ouverts via le menu Fichier > Ouvrir un projet… ou en les glissant dans
+   la fenêtre. Les projets reçus sont relayés au store web par `window.electronAPI`.
 
-1. Les schémas de données et les catalogues normalisés (**implémentés**).
-2. Le moteur métier (packages/core).
-3. L’application web (apps/web) avec PWA, i18n, accessibilité et exports.
-4. Les scripts spécialisés et le wrapper Electron.
+Le script `fetch:electron-binaries` reste un no-op conformément aux contraintes (aucun binaire dans le dépôt).
 
-## Maintenir les données
+## Ajouter un châssis ou un module
 
-- Ajouter les fichiers véhicules dans `packages/data/vehicles/` et les modules dans `packages/data/catalog/`.
-- Mettre à jour `packages/data/src/index.ts` pour exposer toute nouvelle ressource.
-- Lancer `pnpm run validate:data` pour s’assurer que :
-  - les JSON respectent les schémas,
-  - le projet d’exemple reste valide,
-  - les JSON Schema sont régénérés.
-- Commiter les JSON Schema (`packages/data/json-schema/*.schema.json`) générés automatiquement.
+1. Créer un JSON dans `packages/data/vehicles/` ou `packages/data/catalog/` (respect strict des schémas).
+2. Lancer `pnpm --filter @pkg/scripts run validate:data` pour valider, régénérer les exports TypeScript et les
+   JSON Schema.
+3. Ajouter/mettre à jour les tests correspondants si nécessaire.
+4. Mettre à jour la documentation (`docs/DATA_SCHEMA.md`, changelog, etc.).
 
-Chaque étape s’accompagnera de tests et de documentation dédiés.
+## Flux de contribution
+
+1. `pnpm install`
+2. Implémentation + tests unitaires (`pnpm test`) + e2e (`pnpm e2e`).
+3. `pnpm build` pour vérifier la production PWA + Electron.
+4. Commits puis ouverture de PR. La CI rejouera lint/typecheck/tests/e2e/build et publiera les artefacts.

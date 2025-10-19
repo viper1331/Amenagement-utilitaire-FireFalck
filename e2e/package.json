@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "test": "echo 'Playwright tests seront ajoutés ultérieurement.'"
+    "pretest": "playwright install --with-deps chromium",
+    "test": "playwright test"
   },
   "devDependencies": {
     "@playwright/test": "^1.43.1"

@@ -1,13 +1,12 @@
-# Raccourcis clavier (prévision)
+# Raccourcis clavier
 
-Les raccourcis seront implémentés dans l’application web. Liste prévisionnelle :
+| Raccourci | Action |
+| --- | --- |
+| Ctrl+Z / Cmd+Z | Annuler la dernière action |
+| Ctrl+Shift+Z / Cmd+Shift+Z | Rétablir |
+| Ctrl+Y / Cmd+Y | Rétablir (alternative Windows) |
+| Delete / Backspace | Supprimer la sélection |
+| Ctrl+D / Cmd+D | Dupliquer la sélection |
+| Ctrl+M / Cmd+M | Activer/désactiver le mode mesure |
 
-- **Ctrl+Z / Cmd+Z** — Annuler.
-- **Ctrl+Shift+Z / Cmd+Shift+Z** — Rétablir.
-- **Ctrl+S / Cmd+S** — Sauvegarder le projet.
-- **Ctrl+O / Cmd+O** — Ouvrir un projet.
-- **M** — Activer l’outil mètre.
-- **F** — Basculer en vue première personne (FPV).
-- **G** — Basculer l’alignement sur la grille (snap).
-
-La table complète sera vérifiée lors de l’étape d’implémentation UI.
+Les raccourcis fonctionnent à la fois dans la PWA et l’application Electron.
