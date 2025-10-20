@@ -12,7 +12,8 @@
 
 | Date (UTC) | Auteur | Résumé |
 |------------|--------|--------|
+| 2025-10-20T11:22:00Z | Équipe FireFalck | Bascule d’affichage du couloir ajoutée (toolbar + raccourci), documentation et schémas mis à jour. |
 | 2025-10-20T10:54:45Z | Équipe FireFalck | Synchronisation avec la revue "suivant" : aucune nouvelle action requise, statut confirmé. |
 | 2025-10-20T10:33:53Z | Équipe FireFalck | Validation initiale des cinq jalons de livraison. |
 
-Dernière mise à jour : 2025-10-20T10:54:45Z.
+Dernière mise à jour : 2025-10-20T11:22:00Z.

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import {
   Toolbar,
   Button,
+  IconButton,
   NumberInput,
   IconPlus,
   IconFolderOpen,
@@ -16,6 +17,8 @@ import {
   IconWalkway,
   IconLanguage,
   IconTheme,
+  IconEye,
+  IconEyeOff,
 } from '@pkg/ui';
 import { triggerProjectExportDownloads } from '../../services/exporters';
 import { downloadProjectFile, parseProjectFile, createEmptyProject } from '../../services/projectLoader';
@@ -43,7 +46,9 @@ export const AppToolbar: React.FC = () => {
   const setRotationSnap = useEditorStore((state) => state.setRotationSnap);
   const evaluation = useEditorStore((state) => state.evaluation);
   const walkwayMinWidth = useEditorStore((state) => state.walkwayMinWidth);
+  const walkwayVisible = useEditorStore((state) => state.walkwayVisible);
   const setWalkwayMinWidth = useEditorStore((state) => state.setWalkwayMinWidth);
+  const toggleWalkwayVisible = useEditorStore((state) => state.toggleWalkwayVisible);
   const importProject = useEditorStore((state) => state.importProject);
   const setProject = useEditorStore((state) => state.setProject);
   const loadDemo = useEditorStore((state) => state.loadDemo);
@@ -109,6 +114,14 @@ export const AppToolbar: React.FC = () => {
     }
     const clamped = Math.min(WALKWAY_MAX_MM, Math.max(WALKWAY_MIN_MM, value));
     setWalkwayMinWidth(clamped);
+  };
+
+  const handleWalkwayToggle = () => {
+    const next = toggleWalkwayVisible();
+    addToast(
+      next ? t('toast.walkwayShown') ?? 'Walkway overlay shown' : t('toast.walkwayHidden') ?? 'Walkway overlay hidden',
+      'info',
+    );
   };
 
   return (
@@ -210,14 +223,26 @@ export const AppToolbar: React.FC = () => {
               ))}
             </select>
           </span>
-          <span className="snap-selector">
+          <span className="snap-selector walkway-controls">
             <IconWalkway />
-          <NumberInput
-            aria-label={t('toolbar.walkway') ?? 'Walkway'}
-            min={WALKWAY_MIN_MM}
-            max={WALKWAY_MAX_MM}
-            step={WALKWAY_STEP_MM}
-            value={walkwayMinWidth.toString()}
+            <IconButton
+              className="toolbar-walkway-toggle"
+              label={
+                walkwayVisible
+                  ? t('toolbar.hideWalkway') ?? 'Hide walkway overlay'
+                  : t('toolbar.showWalkway') ?? 'Show walkway overlay'
+              }
+              icon={walkwayVisible ? <IconEye /> : <IconEyeOff />}
+              active={walkwayVisible}
+              aria-pressed={walkwayVisible}
+              onClick={handleWalkwayToggle}
+            />
+            <NumberInput
+              aria-label={t('toolbar.walkway') ?? 'Walkway'}
+              min={WALKWAY_MIN_MM}
+              max={WALKWAY_MAX_MM}
+              step={WALKWAY_STEP_MM}
+              value={walkwayMinWidth.toString()}
             onChange={handleWalkwayChange}
             title={t('toolbar.walkwayHint') ?? ''}
           />

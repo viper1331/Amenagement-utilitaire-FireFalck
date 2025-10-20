@@ -9,6 +9,7 @@
 - Documentation mise à jour (README, ARCHITECTURE, DEV_GUIDE, USER_GUIDE, QA_CHECKLIST, SHORTCUTS).
 - Mise en évidence visuelle du couloir : surbrillance synchronisée avec la largeur minimale et couleur dynamique
   selon la sévérité (vert/bleu, orange, rouge) des alertes couloir.
+- Bascule d’affichage du couloir (toolbar + Ctrl/Cmd+Alt+W) persistée dans le projet et synchronisée avec les toasts.
 - Export DXF et rapport PDF mentionnant la largeur de couloir et ses alertes pour la traçabilité atelier.
 - Ajustement clavier du couloir (Ctrl/Cmd+Alt+↑/↓ avec Shift pour ±100 mm) avec toast de confirmation.
 

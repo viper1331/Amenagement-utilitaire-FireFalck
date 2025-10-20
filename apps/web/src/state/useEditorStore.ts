@@ -46,6 +46,7 @@ export interface EditorState {
   readonly rotationSnap: number;
   readonly lengthUnit: LengthUnit;
   readonly walkwayMinWidth: number;
+  readonly walkwayVisible: boolean;
   readonly toasts: readonly ToastMessage[];
   readonly history: HistoryState;
   readonly lastAutosave?: number;
@@ -77,6 +78,8 @@ export interface EditorState {
   setRotationSnap: (value: number) => void;
   setLengthUnit: (unit: LengthUnit) => void;
   setWalkwayMinWidth: (value: number) => void;
+  setWalkwayVisible: (visible: boolean) => boolean;
+  toggleWalkwayVisible: () => boolean;
   setLanguage: (language: 'fr' | 'en') => void;
   setTheme: (theme: 'light' | 'dark' | 'system') => void;
   recalcEvaluation: () => void;
@@ -152,6 +155,7 @@ const applyProjectUpdate = (
     rotationSnap: next.settings.snap.rotation_deg,
     lengthUnit: next.settings.unitOptions.length,
     walkwayMinWidth: next.settings.walkway.minWidth_mm,
+    walkwayVisible: next.settings.walkway.showOverlay ?? true,
     history: snapshot
       ? { past: [...state.history.past, snapshot], future: [] }
       : state.history,
@@ -172,6 +176,7 @@ export const useEditorStore = create<EditorState>((set, get) => ({
   rotationSnap: 5,
   lengthUnit: 'mm',
   walkwayMinWidth: 500,
+  walkwayVisible: true,
   toasts: [],
   history: { past: [], future: [] },
   setProject: (project) => {
@@ -179,6 +184,8 @@ export const useEditorStore = create<EditorState>((set, get) => ({
     const vehicle = ensureVehicle(parsed.vehicle.blueprintId);
     const walkwayMinWidth = clampWalkwayWidth(parsed.settings.walkway.minWidth_mm, vehicle);
     parsed.settings.walkway.minWidth_mm = walkwayMinWidth;
+    const walkwayVisible = parsed.settings.walkway.showOverlay ?? true;
+    parsed.settings.walkway.showOverlay = walkwayVisible;
     set({
       ready: true,
       project: parsed,
@@ -188,6 +195,7 @@ export const useEditorStore = create<EditorState>((set, get) => ({
       rotationSnap: parsed.settings.snap.rotation_deg,
       lengthUnit: parsed.settings.unitOptions.length,
       walkwayMinWidth,
+      walkwayVisible,
       history: { past: [], future: [] },
       measure: { active: false, points: [] },
     });
@@ -421,6 +429,23 @@ export const useEditorStore = create<EditorState>((set, get) => ({
       false,
     );
     set({ walkwayMinWidth: nextValue });
+  },
+  setWalkwayVisible: (visible) => {
+    applyProjectUpdate(
+      set,
+      get,
+      (project) => {
+        project.settings.walkway.showOverlay = visible;
+      },
+      false,
+    );
+    set({ walkwayVisible: visible });
+    return visible;
+  },
+  toggleWalkwayVisible: () => {
+    const next = !get().walkwayVisible;
+    get().setWalkwayVisible(next);
+    return next;
   },
   setLanguage: (language) => {
     applyProjectUpdate(

@@ -43,7 +43,8 @@ Chaque fichier JSON du dépôt doit respecter ces schémas, validés via `pnpm r
   - `placements` — liste d’instances : `instanceId`, `moduleSku`, `position_mm` (x,y,z),
     `rotation_deg` (rx,ry,rz), indicateur `locked`, `groupId`, `metadata`.
   - `settings` — préférences projet : `language`, `theme`, `unitOptions`, `snap`, `autosave`, `viewport`,
-    `walkway.minWidth_mm` (largeur minimale du couloir central en mm, défaut 500).
+    `walkway.minWidth_mm` (largeur minimale du couloir central en mm, défaut 500) et `walkway.showOverlay`
+    (booléen, défaut `true`) pour mémoriser l’affichage du couloir dans l’éditeur.
   - `issueOverrides` — levée contrôlée d’alertes.
   - `modulesCatalog` — surcharge optionnelle d’un catalogue embarqué.
   - `metadata`, `notes` — informations libres.

@@ -47,6 +47,7 @@ const snapSettingsSchema = z
 const walkwaySettingsSchema = z
   .object({
     minWidth_mm: z.number().positive().default(500),
+    showOverlay: z.boolean().default(true),
   })
   .strict();
 

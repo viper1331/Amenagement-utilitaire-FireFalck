@@ -49,7 +49,7 @@ export const createEmptyProject = (options: CreateProjectOptions): Project => {
       unitOptions: { length: 'mm', mass: 'kg' },
       snap: { translation_mm: 50, rotation_deg: 5 },
       autosave: { enabled: true, interval_s: 60 },
-      walkway: { minWidth_mm: 500 },
+      walkway: { minWidth_mm: 500, showOverlay: true },
     },
     issueOverrides: [],
   };

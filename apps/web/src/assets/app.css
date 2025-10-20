@@ -254,6 +254,10 @@ body {
   opacity: 0.8;
 }
 
+.walkway-controls .toolbar-walkway-toggle {
+  margin-inline-end: 0.35rem;
+}
+
 .unit-selector {
   display: inline-flex;
   align-items: center;

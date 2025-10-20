@@ -7,7 +7,7 @@ paquet.
 
 - **apps/web** — Application PWA React + Three.js. Charge automatiquement le projet de démonstration, gère
   l’état via Zustand, expose catalogue/propriétés/alerts, visualise le couloir par une surbrillance colorée selon
-  les alertes et orchestre les exports (BOM, DXF, OBJ, glTF, PDF).
+  les alertes avec une bascule toolbar/clavier persistante, et orchestre les exports (BOM, DXF, OBJ, glTF, PDF).
 - **apps/electron** — Wrapper desktop facultatif. Lance la PWA packagée (`apps/web/dist`), relaie
   l’ouverture de fichiers `.fpvproj` et applique un menu minimal (ouvrir, recharger, outils, aide).
 - **packages/core** — Moteur métier : collisions AABB/OBB, dégagements, couloirs (visualisation + largeur

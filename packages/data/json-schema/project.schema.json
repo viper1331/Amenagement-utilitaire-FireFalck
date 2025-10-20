@@ -359,6 +359,10 @@
                   "type": "number",
                   "exclusiveMinimum": 0,
                   "default": 500
+                },
+                "showOverlay": {
+                  "type": "boolean",
+                  "default": true
                 }
               },
               "additionalProperties": false,

@@ -27,4 +27,21 @@ describe('useEditorStore walkway adjustments', () => {
     expect(walkwayMinWidth).toBe(WALKWAY_MIN_MM);
     expect(project?.settings.walkway.minWidth_mm).toBe(WALKWAY_MIN_MM);
   });
+
+  it('toggles walkway overlay visibility and persists to the project settings', () => {
+    const { walkwayVisible: initialVisibility, project: initialProject } = useEditorStore.getState();
+    expect(initialVisibility).toBe(true);
+    expect(initialProject?.settings.walkway.showOverlay).toBe(true);
+
+    const next = useEditorStore.getState().toggleWalkwayVisible();
+    expect(next).toBe(false);
+    const { walkwayVisible: afterToggleVisibility, project: afterToggleProject } = useEditorStore.getState();
+    expect(afterToggleVisibility).toBe(false);
+    expect(afterToggleProject?.settings.walkway.showOverlay).toBe(false);
+
+    useEditorStore.getState().setWalkwayVisible(true);
+    const { walkwayVisible: restoredVisibility, project: restoredProject } = useEditorStore.getState();
+    expect(restoredVisibility).toBe(true);
+    expect(restoredProject?.settings.walkway.showOverlay).toBe(true);
+  });
 });

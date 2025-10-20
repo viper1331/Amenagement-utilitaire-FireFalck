@@ -22,7 +22,8 @@ Ce guide décrit les principales actions dans l’éditeur 3D FireFalck (PWA + E
 - **Couloir** : renseigner la largeur minimale (300–1600 mm) via le champ « Couloir (mm) » pour ajuster les règles de
   dégagement central. La bande au sol change de couleur (bleu/vert = OK, orange = alerte, rouge = critique) et reflète
   en temps réel la largeur suivie par les règles; elle peut aussi être ajustée au clavier via Ctrl+Alt+↑/↓ (Cmd sur
-  macOS), avec un pas de 50 mm ou 100 mm lorsque Shift est enfoncé.
+  macOS), avec un pas de 50 mm ou 100 mm lorsque Shift est enfoncé. Le bouton « œil » adjacent (ou Ctrl/Cmd+Alt+W)
+  permet d’afficher ou masquer la bande, le choix étant sauvegardé dans le projet.
 - **Vue FPV** : bouton « FPV » ou raccourci (voir `docs/SHORTCUTS.md`).
 - **Export** : bouton « Exporter » génère en un clic BOM CSV/JSON, plan DXF, OBJ, glTF, PDF (tous textuels). Le plan
   DXF et le rapport PDF rappellent la largeur de couloir configurée et signalent les éventuelles alertes.

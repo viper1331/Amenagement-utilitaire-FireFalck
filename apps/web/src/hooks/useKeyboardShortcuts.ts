@@ -20,6 +20,7 @@ export const useKeyboardShortcuts = (): void => {
   const measure = useEditorStore((state) => state.measure);
   const walkwayMinWidth = useEditorStore((state) => state.walkwayMinWidth);
   const setWalkwayMinWidth = useEditorStore((state) => state.setWalkwayMinWidth);
+  const toggleWalkwayVisible = useEditorStore((state) => state.toggleWalkwayVisible);
   const vehicle = useEditorStore((state) => state.vehicle);
   const addToast = useEditorStore((state) => state.addToast);
 
@@ -71,6 +72,16 @@ export const useKeyboardShortcuts = (): void => {
           setWalkwayMinWidth(next);
           addToast(t('toast.walkwayAdjusted', { value: next }), 'info');
         }
+        return;
+      }
+      if (modifier && event.altKey && event.key.toLowerCase() === 'w') {
+        event.preventDefault();
+        const next = toggleWalkwayVisible();
+        addToast(
+          next ? t('toast.walkwayShown') ?? 'Walkway overlay shown' : t('toast.walkwayHidden') ?? 'Walkway overlay hidden',
+          'info',
+        );
+        return;
       }
     };
     window.addEventListener('keydown', handler);
@@ -87,5 +98,6 @@ export const useKeyboardShortcuts = (): void => {
     vehicle,
     addToast,
     t,
+    toggleWalkwayVisible,
   ]);
 };

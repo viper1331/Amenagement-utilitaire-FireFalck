@@ -82,6 +82,7 @@ export const SceneCanvas: React.FC = () => {
   const clearMeasure = useEditorStore((state) => state.clearMeasure);
   const translationSnap = useEditorStore((state) => state.translationSnap);
   const walkwayMinWidth = useEditorStore((state) => state.walkwayMinWidth);
+  const walkwayVisible = useEditorStore((state) => state.walkwayVisible);
   const evaluation = useEditorStore((state) => state.evaluation);
   const rotationSnap = project?.settings.snap.rotation_deg ?? 5;
   const walkwayTargetX = project?.settings.viewport?.target_mm?.[0];
@@ -383,9 +384,10 @@ export const SceneCanvas: React.FC = () => {
       return;
     }
     const width = Math.max(0, walkwayMinWidth);
-    walkway.visible = width > 0;
-    walkway.scale.y = width > 0 ? width : 1;
-  }, [walkwayMinWidth]);
+    const shouldDisplay = walkwayVisible && width > 0;
+    walkway.visible = shouldDisplay;
+    walkway.scale.y = shouldDisplay ? width : 1;
+  }, [walkwayMinWidth, walkwayVisible]);
 
   useEffect(() => {
     const walkway = walkwayMeshRef.current;
