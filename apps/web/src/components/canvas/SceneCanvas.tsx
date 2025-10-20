@@ -34,6 +34,8 @@ const hashString = (input: string): number => {
 
 type Vector3 = [number, number, number];
 
+const DEFAULT_WALKWAY_LENGTH_MM = 6000;
+
 export const SceneCanvas: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const rendererRef = useRef<THREE.WebGLRenderer>();
@@ -50,8 +52,10 @@ export const SceneCanvas: React.FC = () => {
       new THREE.LineBasicMaterial({ color: 0xfffb00, linewidth: 2 }),
     ),
   );
+  const walkwayMeshRef = useRef<THREE.Mesh>();
 
   const project = useEditorStore((state) => state.project);
+  const vehicle = useEditorStore((state) => state.vehicle);
   const selectedIds = useEditorStore((state) => state.selectedIds);
   const setSelection = useEditorStore((state) => state.setSelection);
   const addModule = useEditorStore((state) => state.addModule);
@@ -63,7 +67,10 @@ export const SceneCanvas: React.FC = () => {
   const pushMeasurePoint = useEditorStore((state) => state.pushMeasurePoint);
   const clearMeasure = useEditorStore((state) => state.clearMeasure);
   const translationSnap = useEditorStore((state) => state.translationSnap);
+  const walkwayMinWidth = useEditorStore((state) => state.walkwayMinWidth);
   const rotationSnap = project?.settings.snap.rotation_deg ?? 5;
+  const walkwayTargetX = project?.settings.viewport?.target_mm?.[0];
+  const walkwayLength = vehicle?.interiorBox?.length_mm ?? DEFAULT_WALKWAY_LENGTH_MM;
 
   const moduleLookup = useMemo(
     () => new Map<string, EquipmentModule>(catalog.map((entry) => [entry.sku, entry])),
@@ -206,6 +213,36 @@ export const SceneCanvas: React.FC = () => {
     const axes = new THREE.AxesHelper(1200);
     scene.add(axes);
 
+    const walkwayGeometry = new THREE.PlaneGeometry(1, 1);
+    const walkwayMaterial = new THREE.MeshBasicMaterial({
+      color: 0x38bdf8,
+      transparent: true,
+      opacity: 0.14,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+    });
+    const walkwayMesh = new THREE.Mesh(walkwayGeometry, walkwayMaterial);
+    walkwayMesh.name = 'walkway-overlay';
+    walkwayMesh.position.set(0, 0, 1);
+    walkwayMesh.renderOrder = 1;
+
+    const walkwayBorderGeometry = new THREE.PlaneGeometry(1, 1);
+    const walkwayBorder = new THREE.LineSegments(
+      new THREE.EdgesGeometry(walkwayBorderGeometry),
+      new THREE.LineBasicMaterial({
+        color: 0x0ea5e9,
+        transparent: true,
+        opacity: 0.45,
+        depthTest: false,
+        depthWrite: false,
+      }),
+    );
+    walkwayBorder.position.set(0, 0, 0.5);
+    walkwayMesh.add(walkwayBorder);
+    walkwayBorderGeometry.dispose();
+    scene.add(walkwayMesh);
+    walkwayMeshRef.current = walkwayMesh;
+
     const raycaster = new THREE.Raycaster();
     const pointer = new THREE.Vector2();
     const groundPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
@@ -283,6 +320,25 @@ export const SceneCanvas: React.FC = () => {
       pointerControls.dispose();
       renderer.dispose();
       container.removeChild(renderer.domElement);
+      const walkway = walkwayMeshRef.current;
+      if (walkway) {
+        scene.remove(walkway);
+        walkway.traverse((object) => {
+          const meshLike = object as {
+            geometry?: THREE.BufferGeometry;
+            material?: THREE.Material | THREE.Material[];
+          };
+          if (meshLike.geometry) {
+            meshLike.geometry.dispose();
+          }
+          if (Array.isArray(meshLike.material)) {
+            meshLike.material.forEach((material) => material.dispose());
+          } else if (meshLike.material) {
+            meshLike.material.dispose();
+          }
+        });
+        walkwayMeshRef.current = undefined;
+      }
       meshesForCleanup.forEach((mesh) => {
         mesh.geometry.dispose();
         const material = mesh.material as THREE.Material;
@@ -299,6 +355,25 @@ export const SceneCanvas: React.FC = () => {
       transformControls.setRotationSnap(toRadians(rotationSnap));
     }
   }, [translationSnap, rotationSnap]);
+
+  useEffect(() => {
+    const walkway = walkwayMeshRef.current;
+    if (!walkway) {
+      return;
+    }
+    const width = Math.max(0, walkwayMinWidth);
+    walkway.visible = width > 0;
+    walkway.scale.y = width > 0 ? width : 1;
+  }, [walkwayMinWidth]);
+
+  useEffect(() => {
+    const walkway = walkwayMeshRef.current;
+    if (!walkway) {
+      return;
+    }
+    walkway.scale.x = walkwayLength;
+    walkway.position.x = walkwayTargetX ?? walkwayLength / 2;
+  }, [walkwayLength, walkwayTargetX]);
 
   useEffect(() => {
     const placements = project?.placements ?? [];
