@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import {
   Toolbar,
   Button,
+  NumberInput,
   IconPlus,
   IconFolderOpen,
   IconSave,
@@ -12,6 +13,7 @@ import {
   IconRuler,
   IconFPV,
   IconSnap,
+  IconWalkway,
   IconLanguage,
   IconTheme,
 } from '@pkg/ui';
@@ -35,6 +37,8 @@ export const AppToolbar: React.FC = () => {
   const setTranslationSnap = useEditorStore((state) => state.setTranslationSnap);
   const setRotationSnap = useEditorStore((state) => state.setRotationSnap);
   const evaluation = useEditorStore((state) => state.evaluation);
+  const walkwayMinWidth = useEditorStore((state) => state.walkwayMinWidth);
+  const setWalkwayMinWidth = useEditorStore((state) => state.setWalkwayMinWidth);
   const importProject = useEditorStore((state) => state.importProject);
   const setProject = useEditorStore((state) => state.setProject);
   const loadDemo = useEditorStore((state) => state.loadDemo);
@@ -91,6 +95,15 @@ export const AppToolbar: React.FC = () => {
 
   const handleUnitChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setLengthUnit(event.target.value as LengthUnit);
+  };
+
+  const handleWalkwayChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number.parseFloat(event.target.value);
+    if (!Number.isFinite(value)) {
+      return;
+    }
+    const clamped = Math.min(1600, Math.max(300, value));
+    setWalkwayMinWidth(clamped);
   };
 
   return (
@@ -192,9 +205,22 @@ export const AppToolbar: React.FC = () => {
               ))}
             </select>
           </span>
-            <span className="language-selector">
-              {t('legend.units')}
-              <select value={lengthUnit} onChange={handleUnitChange}>
+          <span className="snap-selector">
+            <IconWalkway />
+            <NumberInput
+              aria-label={t('toolbar.walkway') ?? 'Walkway'}
+              min={300}
+              max={1600}
+              step={25}
+              value={walkwayMinWidth.toString()}
+              onChange={handleWalkwayChange}
+              title={t('toolbar.walkwayHint') ?? ''}
+            />
+            <span className="snap-selector__unit">mm</span>
+          </span>
+          <span className="language-selector">
+            {t('legend.units')}
+            <select value={lengthUnit} onChange={handleUnitChange}>
               <option value="mm">{t('toolbar.units.mm')}</option>
               <option value="in">{t('toolbar.units.in')}</option>
             </select>

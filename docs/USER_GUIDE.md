@@ -19,6 +19,8 @@ Ce guide décrit les principales actions dans l’éditeur 3D FireFalck (PWA + E
 - **Undo/Redo** : Ctrl+Z / Ctrl+Shift+Z (Cmd sur macOS) ou boutons dédiés.
 - **Mesure** : bouton « Mesurer » puis cliquer deux points dans la scène.
 - **Snap** : sélectionner pas 25/50/100 mm et rotation 5/10/15°.
+- **Couloir** : renseigner la largeur minimale (300–1600 mm) via le champ « Couloir (mm) » pour ajuster les règles de
+  dégagement central.
 - **Vue FPV** : bouton « FPV » ou raccourci (voir `docs/SHORTCUTS.md`).
 - **Export** : bouton « Exporter » génère en un clic BOM CSV/JSON, plan DXF, OBJ, glTF, PDF (tous textuels).
 - **Sauvegarde locale** : `Enregistrer` télécharge un `.fpvproj`. IndexedDB sauvegarde automatiquement toutes les 60 s.

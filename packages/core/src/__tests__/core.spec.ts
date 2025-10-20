@@ -124,6 +124,16 @@ describe('project context and rules', () => {
     expect(issues.some((issue) => issue.code === 'walkway.blocked')).toBe(true);
   });
 
+  it('propagates walkway configuration from project settings', () => {
+    const projectClone = cloneProject(demo);
+    projectClone.settings.walkway = {
+      ...projectClone.settings.walkway,
+      minWidth_mm: 720,
+    };
+    const context = buildContextFromProject(projectClone);
+    expect(context.walkwayMinWidth_mm).toBe(720);
+  });
+
   it('detects clearance blockage on custom module extension', () => {
     const baseModule = equipmentCatalog[0];
     const extendModule: EquipmentModule = {

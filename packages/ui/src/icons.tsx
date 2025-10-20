@@ -66,6 +66,15 @@ export const IconSnap: React.FC = () => (
   </svg>
 );
 
+export const IconWalkway: React.FC = () => (
+  <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden>
+    <path
+      d="M7 4h2v16H7zm8 0h2v16h-2zm-5 3h4v10h-4z"
+      fill="currentColor"
+    />
+  </svg>
+);
+
 export const IconSettings: React.FC = () => (
   <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden>
     <path

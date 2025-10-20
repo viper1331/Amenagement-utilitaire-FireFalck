@@ -351,6 +351,20 @@
                 "position_mm"
               ],
               "additionalProperties": false
+            },
+            "walkway": {
+              "type": "object",
+              "properties": {
+                "minWidth_mm": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "default": 500
+                }
+              },
+              "additionalProperties": false,
+              "default": {
+                "minWidth_mm": 500
+              }
             }
           },
           "additionalProperties": false

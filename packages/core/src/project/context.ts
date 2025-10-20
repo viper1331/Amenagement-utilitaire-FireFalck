@@ -65,7 +65,8 @@ export const buildProjectContext = (
   vehicle: VehicleBlueprint,
   options: BuildContextOptions
 ): ProjectContext => {
-  const walkwayMinWidth = options.walkwayMinWidth_mm ?? DEFAULT_WALKWAY_MM;
+  const walkwayMinWidth =
+    options.walkwayMinWidth_mm ?? project.settings.walkway?.minWidth_mm ?? DEFAULT_WALKWAY_MM;
   const modules: ModulePlacementInstance[] = project.placements.map((placement) => {
     const module = resolveModule(placement.moduleSku, options.modulesCatalog, project.modulesCatalog);
     return createModuleInstance(placement, module);

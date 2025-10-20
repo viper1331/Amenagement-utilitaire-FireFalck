@@ -42,7 +42,8 @@ Chaque fichier JSON du dépôt doit respecter ces schémas, validés via `pnpm r
   - `vehicle` — référence du châssis (`blueprintId`) et marges de charge (`payloadReserve_kg`).
   - `placements` — liste d’instances : `instanceId`, `moduleSku`, `position_mm` (x,y,z),
     `rotation_deg` (rx,ry,rz), indicateur `locked`, `groupId`, `metadata`.
-  - `settings` — préférences projet : `language`, `theme`, `unitOptions`, `snap`, `autosave`, `viewport`.
+  - `settings` — préférences projet : `language`, `theme`, `unitOptions`, `snap`, `autosave`, `viewport`,
+    `walkway.minWidth_mm` (largeur minimale du couloir central en mm, défaut 500).
   - `issueOverrides` — levée contrôlée d’alertes.
   - `modulesCatalog` — surcharge optionnelle d’un catalogue embarqué.
   - `metadata`, `notes` — informations libres.

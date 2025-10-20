@@ -44,6 +44,7 @@ export interface EditorState {
   readonly translationSnap: number;
   readonly rotationSnap: number;
   readonly lengthUnit: LengthUnit;
+  readonly walkwayMinWidth: number;
   readonly toasts: readonly ToastMessage[];
   readonly history: HistoryState;
   readonly lastAutosave?: number;
@@ -74,6 +75,7 @@ export interface EditorState {
   setTranslationSnap: (value: number) => void;
   setRotationSnap: (value: number) => void;
   setLengthUnit: (unit: LengthUnit) => void;
+  setWalkwayMinWidth: (value: number) => void;
   setLanguage: (language: 'fr' | 'en') => void;
   setTheme: (theme: 'light' | 'dark' | 'system') => void;
   recalcEvaluation: () => void;
@@ -138,6 +140,7 @@ const applyProjectUpdate = (
     translationSnap: next.settings.snap.translation_mm,
     rotationSnap: next.settings.snap.rotation_deg,
     lengthUnit: next.settings.unitOptions.length,
+    walkwayMinWidth: next.settings.walkway.minWidth_mm,
     history: snapshot
       ? { past: [...state.history.past, snapshot], future: [] }
       : state.history,
@@ -157,6 +160,7 @@ export const useEditorStore = create<EditorState>((set, get) => ({
   translationSnap: 50,
   rotationSnap: 5,
   lengthUnit: 'mm',
+  walkwayMinWidth: 500,
   toasts: [],
   history: { past: [], future: [] },
   setProject: (project) => {
@@ -170,6 +174,7 @@ export const useEditorStore = create<EditorState>((set, get) => ({
       translationSnap: parsed.settings.snap.translation_mm,
       rotationSnap: parsed.settings.snap.rotation_deg,
       lengthUnit: parsed.settings.unitOptions.length,
+      walkwayMinWidth: parsed.settings.walkway.minWidth_mm,
       history: { past: [], future: [] },
       measure: { active: false, points: [] },
     });
@@ -391,6 +396,17 @@ export const useEditorStore = create<EditorState>((set, get) => ({
     );
     set({ lengthUnit: unit });
   },
+  setWalkwayMinWidth: (value) => {
+    applyProjectUpdate(
+      set,
+      get,
+      (project) => {
+        project.settings.walkway.minWidth_mm = value;
+      },
+      false,
+    );
+    set({ walkwayMinWidth: value });
+  },
   setLanguage: (language) => {
     applyProjectUpdate(
       set,
@@ -418,6 +434,7 @@ export const useEditorStore = create<EditorState>((set, get) => ({
     }
     const evaluation = evaluateProject(project, vehicle, {
       modulesCatalog: equipmentModuleBySku,
+      walkwayMinWidth_mm: project.settings.walkway.minWidth_mm,
     });
     set({ evaluation });
   },

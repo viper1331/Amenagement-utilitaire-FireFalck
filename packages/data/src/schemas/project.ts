@@ -44,6 +44,12 @@ const snapSettingsSchema = z
   })
   .strict();
 
+const walkwaySettingsSchema = z
+  .object({
+    minWidth_mm: z.number().positive().default(500),
+  })
+  .strict();
+
 const projectVehicleSchema = z
   .object({
     blueprintId: z.string().min(1),
@@ -66,6 +72,7 @@ const projectSettingsSchema = z
         up: vector3Schema.optional(),
       })
       .optional(),
+    walkway: walkwaySettingsSchema.default({ minWidth_mm: 500 }),
   })
   .strict();
 

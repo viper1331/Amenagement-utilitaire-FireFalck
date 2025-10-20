@@ -235,12 +235,23 @@ body {
 
 .language-selector select,
 .theme-selector select,
-.snap-selector select {
+.snap-selector select,
+.snap-selector input {
   background: transparent;
   border: none;
   color: inherit;
   font-weight: 600;
   font-size: 0.85rem;
+}
+
+.snap-selector input {
+  width: 4.5rem;
+  padding: 0.15rem 0.25rem;
+}
+
+.snap-selector__unit {
+  font-size: 0.75rem;
+  opacity: 0.8;
 }
 
 .unit-selector {
