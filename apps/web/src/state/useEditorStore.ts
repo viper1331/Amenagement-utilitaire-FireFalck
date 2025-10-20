@@ -10,6 +10,7 @@ import {
 import { evaluateProject, type ProjectEvaluation } from '@pkg/core';
 import { nanoid } from 'nanoid';
 import { create } from 'zustand';
+import { WALKWAY_MIN_MM, WALKWAY_MAX_MM } from '../constants/walkway';
 
 export type LengthUnit = 'mm' | 'in';
 
@@ -112,6 +113,16 @@ const ensureVehicle = (blueprintId: string): VehicleBlueprint => {
   return vehicle;
 };
 
+const clampWalkwayWidth = (value: number, vehicle: VehicleBlueprint | null | undefined): number => {
+  const target = Math.round(value);
+  const vehicleWidth = vehicle?.interiorBox?.width_mm;
+  const upperBound = Math.max(
+    WALKWAY_MIN_MM,
+    Math.min(WALKWAY_MAX_MM, Math.round(vehicleWidth ?? WALKWAY_MAX_MM)),
+  );
+  return Math.min(upperBound, Math.max(WALKWAY_MIN_MM, target));
+};
+
 const calculateDistance = (a: Vector3, b: Vector3): number => {
   const dx = a[0] - b[0];
   const dy = a[1] - b[1];
@@ -166,6 +177,8 @@ export const useEditorStore = create<EditorState>((set, get) => ({
   setProject: (project) => {
     const parsed = projectSchema.parse(project);
     const vehicle = ensureVehicle(parsed.vehicle.blueprintId);
+    const walkwayMinWidth = clampWalkwayWidth(parsed.settings.walkway.minWidth_mm, vehicle);
+    parsed.settings.walkway.minWidth_mm = walkwayMinWidth;
     set({
       ready: true,
       project: parsed,
@@ -174,7 +187,7 @@ export const useEditorStore = create<EditorState>((set, get) => ({
       translationSnap: parsed.settings.snap.translation_mm,
       rotationSnap: parsed.settings.snap.rotation_deg,
       lengthUnit: parsed.settings.unitOptions.length,
-      walkwayMinWidth: parsed.settings.walkway.minWidth_mm,
+      walkwayMinWidth,
       history: { past: [], future: [] },
       measure: { active: false, points: [] },
     });
@@ -397,15 +410,17 @@ export const useEditorStore = create<EditorState>((set, get) => ({
     set({ lengthUnit: unit });
   },
   setWalkwayMinWidth: (value) => {
+    const vehicle = get().vehicle;
+    const nextValue = clampWalkwayWidth(value, vehicle);
     applyProjectUpdate(
       set,
       get,
       (project) => {
-        project.settings.walkway.minWidth_mm = value;
+        project.settings.walkway.minWidth_mm = nextValue;
       },
       false,
     );
-    set({ walkwayMinWidth: value });
+    set({ walkwayMinWidth: nextValue });
   },
   setLanguage: (language) => {
     applyProjectUpdate(

@@ -8,5 +8,7 @@
 | Delete / Backspace | Supprimer la sélection |
 | Ctrl+D / Cmd+D | Dupliquer la sélection |
 | Ctrl+M / Cmd+M | Activer/désactiver le mode mesure |
+| Ctrl+Alt+↑ / Cmd+Alt+↑ | Augmenter la largeur du couloir (+50 mm, +100 mm avec Shift) |
+| Ctrl+Alt+↓ / Cmd+Alt+↓ | Réduire la largeur du couloir (−50 mm, −100 mm avec Shift) |
 
 Les raccourcis fonctionnent à la fois dans la PWA et l’application Electron.

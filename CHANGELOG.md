@@ -9,6 +9,7 @@
 - Documentation mise à jour (README, ARCHITECTURE, DEV_GUIDE, USER_GUIDE, QA_CHECKLIST, SHORTCUTS).
 - Mise en évidence visuelle du couloir : surbrillance turquoise synchronisée avec le réglage de largeur minimale.
 - Export DXF et rapport PDF mentionnant la largeur de couloir et ses alertes pour la traçabilité atelier.
+- Ajustement clavier du couloir (Ctrl/Cmd+Alt+↑/↓ avec Shift pour ±100 mm) avec toast de confirmation.
 
 ## [0.4.0] - 2024-05-XX
 ### Added

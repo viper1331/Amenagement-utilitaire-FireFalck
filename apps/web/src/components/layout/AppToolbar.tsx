@@ -20,6 +20,11 @@ import {
 import { triggerProjectExportDownloads } from '../../services/exporters';
 import { downloadProjectFile, parseProjectFile, createEmptyProject } from '../../services/projectLoader';
 import { useEditorStore, type LengthUnit } from '../../state/useEditorStore';
+import {
+  WALKWAY_MAX_MM,
+  WALKWAY_MIN_MM,
+  WALKWAY_STEP_MM,
+} from '../../constants/walkway';
 
 const SNAP_OPTIONS = [25, 50, 100] as const;
 
@@ -102,7 +107,7 @@ export const AppToolbar: React.FC = () => {
     if (!Number.isFinite(value)) {
       return;
     }
-    const clamped = Math.min(1600, Math.max(300, value));
+    const clamped = Math.min(WALKWAY_MAX_MM, Math.max(WALKWAY_MIN_MM, value));
     setWalkwayMinWidth(clamped);
   };
 
@@ -207,15 +212,15 @@ export const AppToolbar: React.FC = () => {
           </span>
           <span className="snap-selector">
             <IconWalkway />
-            <NumberInput
-              aria-label={t('toolbar.walkway') ?? 'Walkway'}
-              min={300}
-              max={1600}
-              step={25}
-              value={walkwayMinWidth.toString()}
-              onChange={handleWalkwayChange}
-              title={t('toolbar.walkwayHint') ?? ''}
-            />
+          <NumberInput
+            aria-label={t('toolbar.walkway') ?? 'Walkway'}
+            min={WALKWAY_MIN_MM}
+            max={WALKWAY_MAX_MM}
+            step={WALKWAY_STEP_MM}
+            value={walkwayMinWidth.toString()}
+            onChange={handleWalkwayChange}
+            title={t('toolbar.walkwayHint') ?? ''}
+          />
             <span className="snap-selector__unit">mm</span>
           </span>
           <span className="language-selector">
