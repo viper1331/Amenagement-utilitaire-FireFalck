@@ -1,0 +1,8 @@
+{
+  "name": "@examples/root",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Exemples statiques, rien à construire.'"
+  }
+}

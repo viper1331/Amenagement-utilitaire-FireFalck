@@ -1,0 +1,12 @@
+{
+  "$schemaVersion": "1.0.0",
+  "sku": "MOD-ABSORBENT-EPI",
+  "name": "Bac absorbant & EPI",
+  "description": "Bac composite pour absorbants et EPI souillés.",
+  "bbox_mm": { "length_mm": 700, "width_mm": 500, "height_mm": 600 },
+  "mass_kg": 22,
+  "clearances_mm": { "top_mm": 250, "front_mm": 350 },
+  "mounting": { "type": "floor", "hardware": ["sangle cliquet"], "notes": "Extraction verticale" },
+  "reachPriority": "med",
+  "tags": ["hazmat", "absorbent", "container"]
+}

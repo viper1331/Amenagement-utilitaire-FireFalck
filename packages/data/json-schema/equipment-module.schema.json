@@ -1,0 +1,146 @@
+{
+  "$ref": "#/definitions/EquipmentModule",
+  "definitions": {
+    "EquipmentModule": {
+      "type": "object",
+      "properties": {
+        "$schemaVersion": {
+          "type": "string",
+          "minLength": 1,
+          "default": "1.0.0"
+        },
+        "sku": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "bbox_mm": {
+          "type": "object",
+          "properties": {
+            "length_mm": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "width_mm": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "height_mm": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          },
+          "required": [
+            "length_mm",
+            "width_mm",
+            "height_mm"
+          ],
+          "additionalProperties": false
+        },
+        "mass_kg": {
+          "type": "number",
+          "minimum": 0
+        },
+        "clearances_mm": {
+          "type": "object",
+          "properties": {
+            "front_mm": {
+              "type": "number",
+              "minimum": 0
+            },
+            "rear_mm": {
+              "type": "number",
+              "minimum": 0
+            },
+            "left_mm": {
+              "type": "number",
+              "minimum": 0
+            },
+            "right_mm": {
+              "type": "number",
+              "minimum": 0
+            },
+            "top_mm": {
+              "type": "number",
+              "minimum": 0
+            },
+            "bottom_mm": {
+              "type": "number",
+              "minimum": 0
+            },
+            "extend_mm": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "mounting": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "floor",
+                "wall",
+                "ceiling",
+                "rail",
+                "mixed"
+              ]
+            },
+            "hardware": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "notes": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "additionalProperties": false
+        },
+        "reachPriority": {
+          "type": "string",
+          "enum": [
+            "high",
+            "med",
+            "low"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "default": []
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "sku",
+        "name",
+        "bbox_mm",
+        "mass_kg",
+        "mounting",
+        "reachPriority"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

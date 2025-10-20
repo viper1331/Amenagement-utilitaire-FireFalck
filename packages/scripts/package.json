@@ -1,0 +1,20 @@
+{
+  "name": "@pkg/scripts",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "validate:data": "ts-node src/validate-data.ts",
+    "fetch:assets": "node src/fetch-assets.js",
+    "generate:thumbs": "ts-node src/generate-thumbs.ts",
+    "lint": "pnpm run lint:stub",
+    "lint:stub": "echo 'Lint scripts à venir.'",
+    "typecheck": "echo 'Typecheck scripts à venir.'",
+    "test": "echo 'Tests scripts à venir.'"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "5.5.4"
+  }
+}

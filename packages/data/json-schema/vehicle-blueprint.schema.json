@@ -1,0 +1,310 @@
+{
+  "$ref": "#/definitions/VehicleBlueprint",
+  "definitions": {
+    "VehicleBlueprint": {
+      "type": "object",
+      "properties": {
+        "$schemaVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "maker": {
+          "type": "string",
+          "minLength": 1
+        },
+        "family": {
+          "type": "string",
+          "minLength": 1
+        },
+        "variant": {
+          "type": "string",
+          "minLength": 1
+        },
+        "year": {
+          "type": "integer",
+          "minimum": 1900,
+          "maximum": 2100
+        },
+        "fuel": {
+          "type": "string",
+          "enum": [
+            "diesel",
+            "electric",
+            "hybrid",
+            "gasoline",
+            "cng",
+            "hydrogen"
+          ]
+        },
+        "gvw_kg": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "wheelbase_mm": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "overall": {
+          "type": "object",
+          "properties": {
+            "length_mm": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "width_excl_mirrors_mm": {
+              "$ref": "#/definitions/VehicleBlueprint/properties/overall/properties/length_mm"
+            },
+            "width_incl_mirrors_mm": {
+              "$ref": "#/definitions/VehicleBlueprint/properties/overall/properties/length_mm"
+            },
+            "height_mm": {
+              "$ref": "#/definitions/VehicleBlueprint/properties/overall/properties/length_mm"
+            },
+            "ground_clearance_mm": {
+              "$ref": "#/definitions/VehicleBlueprint/properties/overall/properties/length_mm"
+            }
+          },
+          "required": [
+            "length_mm",
+            "width_excl_mirrors_mm",
+            "height_mm"
+          ],
+          "additionalProperties": false
+        },
+        "interiorBox": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "length_mm": {
+                  "type": "number"
+                },
+                "width_mm": {
+                  "type": "number"
+                },
+                "height_mm": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "length_mm",
+                "width_mm",
+                "height_mm"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "openings": {
+          "type": "object",
+          "properties": {
+            "slidingDoor": {
+              "type": "object",
+              "properties": {
+                "width_mm": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "height_mm": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "openingAngle_deg": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 360
+                },
+                "offsetFromRear_mm": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "width_mm",
+                "height_mm"
+              ],
+              "additionalProperties": false
+            },
+            "rearDoor": {
+              "$ref": "#/definitions/VehicleBlueprint/properties/openings/properties/slidingDoor"
+            },
+            "other": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VehicleBlueprint/properties/openings/properties/slidingDoor"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "axles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "index": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "x_mm": {
+                "type": "number"
+              },
+              "maxLoad_kg": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "index",
+              "x_mm"
+            ],
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "axleSpacing": {
+          "type": "object",
+          "properties": {
+            "axle2_to_3_mm": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          },
+          "required": [
+            "axle2_to_3_mm"
+          ],
+          "additionalProperties": false
+        },
+        "bodyworkConstraints": {
+          "type": "object",
+          "properties": {
+            "rear_overhang_min_mm": {
+              "type": "number",
+              "minimum": 0
+            },
+            "rear_overhang_max_mm": {
+              "type": "number",
+              "minimum": 0
+            },
+            "body_length_min_mm": {
+              "type": "number",
+              "minimum": 0
+            },
+            "body_length_max_mm": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "forbiddenZones": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "shape": {
+                "type": "string",
+                "const": "box"
+              },
+              "origin_mm": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "items": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              },
+              "size_mm": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "items": [
+                  {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  }
+                ]
+              },
+              "note": {
+                "type": "string"
+              },
+              "critical": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "id",
+              "shape",
+              "origin_mm",
+              "size_mm"
+            ],
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "notes": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "$schemaVersion",
+        "id",
+        "label",
+        "maker",
+        "family",
+        "variant",
+        "gvw_kg",
+        "wheelbase_mm"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

@@ -1,0 +1,419 @@
+{
+  "$ref": "#/definitions/Project",
+  "definitions": {
+    "Project": {
+      "type": "object",
+      "properties": {
+        "$schemaVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "vehicle": {
+          "type": "object",
+          "properties": {
+            "blueprintId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "payloadReserve_kg": {
+              "type": "number",
+              "minimum": 0
+            },
+            "overrides": {
+              "type": "object",
+              "additionalProperties": {}
+            }
+          },
+          "required": [
+            "blueprintId"
+          ],
+          "additionalProperties": false
+        },
+        "placements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "instanceId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "moduleSku": {
+                "type": "string",
+                "minLength": 1
+              },
+              "position_mm": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "items": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ]
+              },
+              "rotation_deg": {
+                "$ref": "#/definitions/Project/properties/placements/items/properties/position_mm"
+              },
+              "locked": {
+                "type": "boolean",
+                "default": false
+              },
+              "groupId": {
+                "type": "string"
+              },
+              "metadata": {
+                "type": "object",
+                "additionalProperties": {}
+              }
+            },
+            "required": [
+              "instanceId",
+              "moduleSku",
+              "position_mm",
+              "rotation_deg"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "modulesCatalog": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "$schemaVersion": {
+                "type": "string",
+                "minLength": 1,
+                "default": "1.0.0"
+              },
+              "sku": {
+                "type": "string",
+                "minLength": 1
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "description": {
+                "type": "string"
+              },
+              "bbox_mm": {
+                "type": "object",
+                "properties": {
+                  "length_mm": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "width_mm": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "height_mm": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  }
+                },
+                "required": [
+                  "length_mm",
+                  "width_mm",
+                  "height_mm"
+                ],
+                "additionalProperties": false
+              },
+              "mass_kg": {
+                "type": "number",
+                "minimum": 0
+              },
+              "clearances_mm": {
+                "type": "object",
+                "properties": {
+                  "front_mm": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "rear_mm": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "left_mm": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "right_mm": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "top_mm": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "bottom_mm": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "extend_mm": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                },
+                "additionalProperties": false
+              },
+              "mounting": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "floor",
+                      "wall",
+                      "ceiling",
+                      "rail",
+                      "mixed"
+                    ]
+                  },
+                  "hardware": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "notes": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type"
+                ],
+                "additionalProperties": false
+              },
+              "reachPriority": {
+                "type": "string",
+                "enum": [
+                  "high",
+                  "med",
+                  "low"
+                ]
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "default": []
+              },
+              "metadata": {
+                "type": "object",
+                "additionalProperties": {}
+              }
+            },
+            "required": [
+              "sku",
+              "name",
+              "bbox_mm",
+              "mass_kg",
+              "mounting",
+              "reachPriority"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "settings": {
+          "type": "object",
+          "properties": {
+            "language": {
+              "type": "string",
+              "enum": [
+                "fr",
+                "en"
+              ],
+              "default": "fr"
+            },
+            "theme": {
+              "type": "string",
+              "enum": [
+                "light",
+                "dark",
+                "system"
+              ],
+              "default": "system"
+            },
+            "unitOptions": {
+              "type": "object",
+              "properties": {
+                "length": {
+                  "type": "string",
+                  "enum": [
+                    "mm",
+                    "in"
+                  ],
+                  "default": "mm"
+                },
+                "mass": {
+                  "type": "string",
+                  "enum": [
+                    "kg",
+                    "lb"
+                  ],
+                  "default": "kg"
+                }
+              },
+              "additionalProperties": false,
+              "default": {
+                "length": "mm",
+                "mass": "kg"
+              }
+            },
+            "snap": {
+              "type": "object",
+              "properties": {
+                "translation_mm": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "default": 50
+                },
+                "rotation_deg": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "default": 5
+                }
+              },
+              "additionalProperties": false,
+              "default": {
+                "translation_mm": 50,
+                "rotation_deg": 5
+              }
+            },
+            "autosave": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "interval_s": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "default": 30
+                }
+              },
+              "additionalProperties": false,
+              "default": {
+                "enabled": true,
+                "interval_s": 30
+              }
+            },
+            "viewport": {
+              "type": "object",
+              "properties": {
+                "target_mm": {
+                  "$ref": "#/definitions/Project/properties/placements/items/properties/position_mm"
+                },
+                "position_mm": {
+                  "$ref": "#/definitions/Project/properties/placements/items/properties/position_mm"
+                },
+                "up": {
+                  "$ref": "#/definitions/Project/properties/placements/items/properties/position_mm"
+                }
+              },
+              "required": [
+                "target_mm",
+                "position_mm"
+              ],
+              "additionalProperties": false
+            },
+            "walkway": {
+              "type": "object",
+              "properties": {
+                "minWidth_mm": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "default": 500
+                }
+              },
+              "additionalProperties": false,
+              "default": {
+                "minWidth_mm": 500
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "issueOverrides": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "minLength": 1
+              },
+              "acknowledgedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "note": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "code"
+            ],
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$schemaVersion",
+        "id",
+        "name",
+        "version",
+        "createdAt",
+        "updatedAt",
+        "vehicle",
+        "placements",
+        "settings"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
