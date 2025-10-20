@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "allowJs": false,
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "types": ["vitest"],
+    "baseUrl": ".",
+    "paths": {
+      "@pkg/data": ["packages/data/src/index"],
+      "@pkg/core": ["packages/core/src/index"],
+      "@pkg/ui": ["packages/ui/src/index"],
+      "@pkg/scripts": ["packages/scripts/src/index"],
+      "@app/web": ["apps/web/src/index"],
+      "@app/web/*": ["apps/web/src/*"],
+      "@app/electron": ["apps/electron/src/main"],
+      "@app/electron/*": ["apps/electron/src/*"]
+    }
+  },
+  "include": [],
+  "exclude": ["node_modules", "dist"]
+}

@@ -1,0 +1,12 @@
+{
+  "$schemaVersion": "1.0.0",
+  "sku": "MOD-RACK-ARI-DOUBLE",
+  "name": "Rack ARI double",
+  "description": "Double rack pour appareils respiratoires isolants, accès immédiat porte latérale.",
+  "bbox_mm": { "length_mm": 900, "width_mm": 450, "height_mm": 1450 },
+  "mass_kg": 58,
+  "clearances_mm": { "front_mm": 600, "top_mm": 150 },
+  "mounting": { "type": "floor", "hardware": ["M10 anchor", "aluminium frame"], "notes": "Fixation sur plancher renforcé" },
+  "reachPriority": "high",
+  "tags": ["ari", "respiratory", "rapid-access"]
+}
