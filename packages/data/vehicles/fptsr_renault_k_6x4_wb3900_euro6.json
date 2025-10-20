@@ -1,0 +1,32 @@
+{
+  "$schemaVersion": "1.0.0",
+  "id": "fptsr_renault_k_6x4_wb3900_euro6",
+  "label": "FPTSR – Renault Trucks K 6×4 – WB 3900",
+  "maker": "Renault Trucks",
+  "family": "K",
+  "variant": "6x4",
+  "fuel": "diesel",
+  "gvw_kg": 35000,
+  "wheelbase_mm": 3900,
+  "overall": {
+    "length_mm": null,
+    "width_excl_mirrors_mm": null,
+    "height_mm": null
+  },
+  "axles": [
+    { "index": 1, "x_mm": 0, "maxLoad_kg": null },
+    { "index": 2, "x_mm": 3900, "maxLoad_kg": null },
+    { "index": 3, "x_mm": 5270, "maxLoad_kg": null }
+  ],
+  "axleSpacing": { "axle2_to_3_mm": 1370 },
+  "bodyworkConstraints": {
+    "rear_overhang_min_mm": 2254,
+    "rear_overhang_max_mm": 2856,
+    "body_length_min_mm": 6179,
+    "body_length_max_mm": 6781
+  },
+  "interiorBox": null,
+  "openings": {},
+  "forbiddenZones": [],
+  "notes": "WB 3900, entraxe AR 1370 mm; respecter plages carrosserie; intérieur : carrossier."
+}
