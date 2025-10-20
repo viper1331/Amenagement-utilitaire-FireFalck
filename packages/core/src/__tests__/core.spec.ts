@@ -224,6 +224,14 @@ describe('exporters', () => {
     const dxf = generateDxf(context);
     expect(dxf).toContain('FLOOR');
     expect(dxf).toContain('LWPOLYLINE');
+    expect(dxf).toContain('WALKWAY');
+  });
+
+  it('projects walkway width into DXF annotations', () => {
+    const context = buildContextFromProject();
+    const dxf = generateDxf(context);
+    expect(dxf).toContain('Couloir');
+    expect(dxf).toMatch(/Couloir\s+\d+\s+mm/);
   });
 
   it('generates OBJ with vertex definitions', () => {
@@ -248,6 +256,7 @@ describe('exporters', () => {
     const scores = scoreModules(context, mass);
     const pdf = generatePdfReport(context, mass, [], scores, buildBomEntries(context));
     expect(pdf.startsWith('%PDF')).toBe(true);
+    expect(pdf).toContain('Couloir min');
   });
 });
 

@@ -50,6 +50,25 @@ export const generateDxf = (context: ProjectContext): string => {
       vec3(-halfLength, halfWidth, 0),
     ];
     sections.push(polygonToLwPolyline('FLOOR', floorPoints));
+
+    const walkwayWidth = Math.min(Math.max(context.walkwayMinWidth_mm, 0), interior.width_mm);
+    if (walkwayWidth > 0) {
+      const walkwayHalf = walkwayWidth / 2;
+      const walkwayPoints = [
+        vec3(-halfLength, -walkwayHalf, 0),
+        vec3(halfLength, -walkwayHalf, 0),
+        vec3(halfLength, walkwayHalf, 0),
+        vec3(-halfLength, walkwayHalf, 0),
+      ];
+      sections.push(polygonToLwPolyline('WALKWAY', walkwayPoints));
+      sections.push(
+        addTextEntity(
+          'WALKWAY',
+          vec3(0, walkwayHalf + 150, 0),
+          `Couloir ${walkwayWidth.toFixed(0)} mm`
+        )
+      );
+    }
   }
 
   context.modules.forEach((module) => {

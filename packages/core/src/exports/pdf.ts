@@ -30,12 +30,15 @@ const buildContentStream = (
 
   pushLine(`Projet: ${context.project.name}`);
   pushLine(`Véhicule: ${context.vehicle.label}`);
+  pushLine(`Couloir min: ${context.walkwayMinWidth_mm.toFixed(0)} mm`);
   pushLine(`Masse totale: ${mass.totalMass_kg.toFixed(1)} kg - Barycentre X: ${mass.barycenterX_mm.toFixed(1)} mm`);
   mass.axleLoads.forEach((axle) => {
     pushLine(
       `Essieu ${axle.index}: ${axle.load_kg.toFixed(1)} kg (${Math.round(axle.utilization * 100)}%)`
     );
   });
+
+  const walkwayIssues = issues.filter((issue) => issue.code.startsWith('walkway'));
 
   if (issues.length === 0) {
     pushLine('Aucune alerte.');
@@ -44,6 +47,12 @@ const buildContentStream = (
     issues.slice(0, 6).forEach((issue) => {
       pushLine(`- [${issue.severity}] ${issue.code}`);
     });
+  }
+
+  if (walkwayIssues.length === 0) {
+    pushLine('Couloir: conforme.');
+  } else {
+    pushLine(`Couloir: ${walkwayIssues.length} alerte(s).`);
   }
 
   pushLine('Scores modules (top 5):');

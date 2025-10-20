@@ -22,7 +22,8 @@ Ce guide décrit les principales actions dans l’éditeur 3D FireFalck (PWA + E
 - **Couloir** : renseigner la largeur minimale (300–1600 mm) via le champ « Couloir (mm) » pour ajuster les règles de
   dégagement central. La bande turquoise au sol reflète en temps réel la largeur suivie par les règles.
 - **Vue FPV** : bouton « FPV » ou raccourci (voir `docs/SHORTCUTS.md`).
-- **Export** : bouton « Exporter » génère en un clic BOM CSV/JSON, plan DXF, OBJ, glTF, PDF (tous textuels).
+- **Export** : bouton « Exporter » génère en un clic BOM CSV/JSON, plan DXF, OBJ, glTF, PDF (tous textuels). Le plan
+  DXF et le rapport PDF rappellent la largeur de couloir configurée et signalent les éventuelles alertes.
 - **Sauvegarde locale** : `Enregistrer` télécharge un `.fpvproj`. IndexedDB sauvegarde automatiquement toutes les 60 s.
 - **Import** : `Ouvrir` (sélection de fichier) ou glisser un `.fpvproj` dans la scène (PWA) / fenêtre (Electron).
 - **Langues** : sélecteur FR/EN dans la barre d’outils, commutation instantanée.

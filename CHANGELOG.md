@@ -8,6 +8,7 @@
 - Scénarios Playwright (3) couvrant placement & export, bascule FR/EN + FPV + sauvegarde, stress alertes.
 - Documentation mise à jour (README, ARCHITECTURE, DEV_GUIDE, USER_GUIDE, QA_CHECKLIST, SHORTCUTS).
 - Mise en évidence visuelle du couloir : surbrillance turquoise synchronisée avec le réglage de largeur minimale.
+- Export DXF et rapport PDF mentionnant la largeur de couloir et ses alertes pour la traçabilité atelier.
 
 ## [0.4.0] - 2024-05-XX
 ### Added

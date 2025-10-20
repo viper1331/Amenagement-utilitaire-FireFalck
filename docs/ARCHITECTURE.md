@@ -10,8 +10,9 @@ paquet.
   orchestre les exports (BOM, DXF, OBJ, glTF, PDF).
 - **apps/electron** — Wrapper desktop facultatif. Lance la PWA packagée (`apps/web/dist`), relaie
   l’ouverture de fichiers `.fpvproj` et applique un menu minimal (ouvrir, recharger, outils, aide).
-- **packages/core** — Moteur métier : collisions AABB/OBB, dégagements, couloirs, priorisation, masses et
-  essieux, exports texte. `evaluateProject` renvoie `ProjectEvaluation` consumée par le front.
+- **packages/core** — Moteur métier : collisions AABB/OBB, dégagements, couloirs (visualisation + largeur
+  projetée dans DXF/PDF), priorisation, masses et essieux, exports texte. `evaluateProject` renvoie
+  `ProjectEvaluation` consumée par le front.
 - **packages/ui** — Bibliothèque de composants accessibles (Toolbar, Panels, champs, icônes SVG inline,
   thèmes clair/sombre) utilisée par la PWA.
 - **packages/data** — Schémas Zod + JSON Schema pour `VehicleBlueprint`, `EquipmentModule`, `Project`. Fournit
