@@ -1,0 +1,12 @@
+{
+  "$schemaVersion": "1.0.0",
+  "sku": "MOD-EXT-6KG",
+  "name": "Extincteur 6 kg",
+  "description": "Support extincteur 6 kg mousse/AB pour zone cabine.",
+  "bbox_mm": { "length_mm": 280, "width_mm": 240, "height_mm": 620 },
+  "mass_kg": 10,
+  "clearances_mm": { "front_mm": 250 },
+  "mounting": { "type": "wall", "hardware": ["collier rapide"] },
+  "reachPriority": "high",
+  "tags": ["safety", "extinguisher", "cabin"]
+}

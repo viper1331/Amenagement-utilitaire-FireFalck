@@ -1,0 +1,12 @@
+{
+  "$schemaVersion": "1.0.0",
+  "sku": "MOD-FAN-MOUNT",
+  "name": "Support ventilateur extracteur",
+  "description": "Support inclinable pour ventilateur sur porte latérale.",
+  "bbox_mm": { "length_mm": 600, "width_mm": 320, "height_mm": 780 },
+  "mass_kg": 18,
+  "clearances_mm": { "front_mm": 350, "left_mm": 150 },
+  "mounting": { "type": "wall", "hardware": ["platine inox", "verrou quart de tour"], "notes": "Positionner proche ouverture" },
+  "reachPriority": "high",
+  "tags": ["ventilation", "support", "door-zone"]
+}
