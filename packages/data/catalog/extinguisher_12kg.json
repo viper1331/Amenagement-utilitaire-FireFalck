@@ -1,0 +1,12 @@
+{
+  "$schemaVersion": "1.0.0",
+  "sku": "MOD-EXT-12KG",
+  "name": "Extincteur 12 kg",
+  "description": "Support extincteur poudre 12 kg avec blocage rapide.",
+  "bbox_mm": { "length_mm": 350, "width_mm": 300, "height_mm": 750 },
+  "mass_kg": 16,
+  "clearances_mm": { "front_mm": 300 },
+  "mounting": { "type": "wall", "hardware": ["platine acier"], "notes": "Prévoir accès immédiat" },
+  "reachPriority": "high",
+  "tags": ["safety", "extinguisher", "poudre"]
+}

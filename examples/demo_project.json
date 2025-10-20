@@ -1,0 +1,82 @@
+{
+  "$schemaVersion": "1.0.0",
+  "id": "demo-vsav-2025",
+  "name": "VSAV Démonstration 2025",
+  "description": "Exemple préchargé pour valider les règles principales sur Master E-Tech L2H2.",
+  "version": "1.0.0",
+  "createdAt": "2025-01-12T09:30:00.000Z",
+  "updatedAt": "2025-01-12T09:45:00.000Z",
+  "vehicle": {
+    "blueprintId": "vsav_master_l2h2_etech_2025",
+    "payloadReserve_kg": 180
+  },
+  "placements": [
+    {
+      "instanceId": "rack-ari-01",
+      "moduleSku": "MOD-RACK-ARI-DOUBLE",
+      "position_mm": [1100, -720, 0],
+      "rotation_deg": [0, 90, 0],
+      "locked": true
+    },
+    {
+      "instanceId": "drawer-1200-01",
+      "moduleSku": "MOD-DRAWER-1200",
+      "position_mm": [600, 720, 0],
+      "rotation_deg": [0, -90, 0]
+    },
+    {
+      "instanceId": "drawer-800-01",
+      "moduleSku": "MOD-DRAWER-800",
+      "position_mm": [1250, 720, 0],
+      "rotation_deg": [0, -90, 0]
+    },
+    {
+      "instanceId": "shelf-01",
+      "moduleSku": "MOD-SHELF-ADJUST",
+      "position_mm": [1900, 720, 0],
+      "rotation_deg": [0, -90, 0]
+    },
+    {
+      "instanceId": "fan-mount-01",
+      "moduleSku": "MOD-FAN-MOUNT",
+      "position_mm": [1350, -720, 350],
+      "rotation_deg": [0, 90, 0]
+    },
+    {
+      "instanceId": "absorbent-01",
+      "moduleSku": "MOD-ABSORBENT-EPI",
+      "position_mm": [2200, 720, 0],
+      "rotation_deg": [0, -90, 0]
+    },
+    {
+      "instanceId": "worktop-01",
+      "moduleSku": "MOD-WORKTOP-FOLD",
+      "position_mm": [2600, -720, 900],
+      "rotation_deg": [0, 90, 0]
+    },
+    {
+      "instanceId": "ext-6kg-01",
+      "moduleSku": "MOD-EXT-6KG",
+      "position_mm": [400, -720, 0],
+      "rotation_deg": [0, 90, 0]
+    }
+  ],
+  "settings": {
+    "language": "fr",
+    "theme": "light",
+    "unitOptions": { "length": "mm", "mass": "kg" },
+    "snap": { "translation_mm": 50, "rotation_deg": 5 },
+    "autosave": { "enabled": true, "interval_s": 60 },
+    "walkway": { "minWidth_mm": 600 },
+    "viewport": {
+      "target_mm": [1500, 0, 900],
+      "position_mm": [3500, 1500, 1700]
+    }
+  },
+  "issueOverrides": [],
+  "metadata": {
+    "author": "FireFalck",
+    "purpose": "demo-load"
+  },
+  "notes": "Déplacement libre des modules possible pour tester collisions et règles."
+}
