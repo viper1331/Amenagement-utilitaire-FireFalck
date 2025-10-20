@@ -8,4 +8,11 @@
 | 4 | Application web PWA | ✅ Terminé | Éditeur React/Three.js complet avec PWA offline-first, IndexedDB, i18n, raccourcis et interface ARIA. |
 | 5 | Option Electron & E2E | ✅ Terminé | Bridge Electron pour `.fpvproj`, documentation associée et scénarios Playwright vérifiant exports, FPV et stress test. |
 
-Dernière mise à jour : 2025-10-20T10:33:53Z.
+## Historique des mises à jour
+
+| Date (UTC) | Auteur | Résumé |
+|------------|--------|--------|
+| 2025-10-20T10:54:45Z | Équipe FireFalck | Synchronisation avec la revue "suivant" : aucune nouvelle action requise, statut confirmé. |
+| 2025-10-20T10:33:53Z | Équipe FireFalck | Validation initiale des cinq jalons de livraison. |
+
+Dernière mise à jour : 2025-10-20T10:54:45Z.
