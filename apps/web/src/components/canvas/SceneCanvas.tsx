@@ -4,7 +4,9 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
 import type { EquipmentModule } from '@pkg/data';
+import type { IssueSeverity } from '@pkg/core';
 import { useEditorStore } from '../../state/useEditorStore';
+import { deriveWalkwayStatus } from '../../utils/walkway';
 
 THREE.Object3D.DEFAULT_UP.set(0, 0, 1);
 
@@ -35,6 +37,18 @@ const hashString = (input: string): number => {
 type Vector3 = [number, number, number];
 
 const DEFAULT_WALKWAY_LENGTH_MM = 6000;
+
+const walkwayAppearance: Record<'clear' | IssueSeverity, {
+  readonly fill: number;
+  readonly opacity: number;
+  readonly border: number;
+  readonly borderOpacity: number;
+}> = {
+  clear: { fill: 0x38bdf8, opacity: 0.14, border: 0x0ea5e9, borderOpacity: 0.45 },
+  info: { fill: 0x22d3ee, opacity: 0.16, border: 0x0284c7, borderOpacity: 0.5 },
+  warning: { fill: 0xf97316, opacity: 0.2, border: 0xea580c, borderOpacity: 0.65 },
+  critical: { fill: 0xef4444, opacity: 0.24, border: 0xb91c1c, borderOpacity: 0.75 },
+};
 
 export const SceneCanvas: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -68,9 +82,15 @@ export const SceneCanvas: React.FC = () => {
   const clearMeasure = useEditorStore((state) => state.clearMeasure);
   const translationSnap = useEditorStore((state) => state.translationSnap);
   const walkwayMinWidth = useEditorStore((state) => state.walkwayMinWidth);
+  const evaluation = useEditorStore((state) => state.evaluation);
   const rotationSnap = project?.settings.snap.rotation_deg ?? 5;
   const walkwayTargetX = project?.settings.viewport?.target_mm?.[0];
   const walkwayLength = vehicle?.interiorBox?.length_mm ?? DEFAULT_WALKWAY_LENGTH_MM;
+
+  const walkwayStatus = useMemo(
+    () => deriveWalkwayStatus(evaluation?.issues),
+    [evaluation],
+  );
 
   const moduleLookup = useMemo(
     () => new Map<string, EquipmentModule>(catalog.map((entry) => [entry.sku, entry])),
@@ -239,6 +259,7 @@ export const SceneCanvas: React.FC = () => {
     );
     walkwayBorder.position.set(0, 0, 0.5);
     walkwayMesh.add(walkwayBorder);
+    walkwayMesh.userData.walkwayBorder = walkwayBorder;
     walkwayBorderGeometry.dispose();
     scene.add(walkwayMesh);
     walkwayMeshRef.current = walkwayMesh;
@@ -374,6 +395,33 @@ export const SceneCanvas: React.FC = () => {
     walkway.scale.x = walkwayLength;
     walkway.position.x = walkwayTargetX ?? walkwayLength / 2;
   }, [walkwayLength, walkwayTargetX]);
+
+  useEffect(() => {
+    const walkway = walkwayMeshRef.current;
+    if (!walkway) {
+      return;
+    }
+    const material = walkway.material;
+    if (Array.isArray(material)) {
+      return;
+    }
+    const border = walkway.userData.walkwayBorder as THREE.LineSegments | undefined;
+    const borderMaterial = border?.material;
+    if (borderMaterial && Array.isArray(borderMaterial)) {
+      return;
+    }
+    const key: 'clear' | IssueSeverity = walkwayStatus.severity ?? 'clear';
+    const appearance = walkwayAppearance[key];
+    const meshMaterial = material as THREE.MeshBasicMaterial;
+    meshMaterial.color.setHex(appearance.fill);
+    meshMaterial.opacity = appearance.opacity;
+    meshMaterial.needsUpdate = true;
+    if (borderMaterial instanceof THREE.LineBasicMaterial) {
+      borderMaterial.color.setHex(appearance.border);
+      borderMaterial.opacity = appearance.borderOpacity;
+      borderMaterial.needsUpdate = true;
+    }
+  }, [walkwayStatus.severity, walkwayStatus.issues.length]);
 
   useEffect(() => {
     const placements = project?.placements ?? [];

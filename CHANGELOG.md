@@ -7,7 +7,8 @@
 - Wrapper Electron avec ouverture `.fpvproj`, menu minimal et passerelle `window.electronAPI`.
 - Scénarios Playwright (3) couvrant placement & export, bascule FR/EN + FPV + sauvegarde, stress alertes.
 - Documentation mise à jour (README, ARCHITECTURE, DEV_GUIDE, USER_GUIDE, QA_CHECKLIST, SHORTCUTS).
-- Mise en évidence visuelle du couloir : surbrillance turquoise synchronisée avec le réglage de largeur minimale.
+- Mise en évidence visuelle du couloir : surbrillance synchronisée avec la largeur minimale et couleur dynamique
+  selon la sévérité (vert/bleu, orange, rouge) des alertes couloir.
 - Export DXF et rapport PDF mentionnant la largeur de couloir et ses alertes pour la traçabilité atelier.
 - Ajustement clavier du couloir (Ctrl/Cmd+Alt+↑/↓ avec Shift pour ±100 mm) avec toast de confirmation.
 

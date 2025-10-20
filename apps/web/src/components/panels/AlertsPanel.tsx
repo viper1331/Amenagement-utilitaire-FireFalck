@@ -4,6 +4,7 @@ import type { Issue, IssueSeverity } from '@pkg/core';
 import { Panel, Badge, IconAlert, IconMass } from '@pkg/ui';
 import { useProjectEvaluation } from '../../hooks/useProjectEvaluation';
 import { formatLength, formatMass } from '../../utils/format';
+import { deriveWalkwayStatus } from '../../utils/walkway';
 
 const severityOrder: Record<IssueSeverity, number> = {
   critical: 3,
@@ -36,6 +37,11 @@ export const AlertsPanel: React.FC = () => {
     return result;
   }, [evaluation]);
 
+  const walkwayStatus = useMemo(
+    () => deriveWalkwayStatus(evaluation?.issues),
+    [evaluation],
+  );
+
   if (!evaluation || !vehicle) {
     return (
       <Panel title={t('alerts.title')} className="app-alerts">
@@ -53,7 +59,13 @@ export const AlertsPanel: React.FC = () => {
           <strong>{t('status.vehicle')}:</strong> {vehicle.label}
         </span>
         <span>
-          <strong>{t('status.walkway')}:</strong> {formatLength(evaluation.context.walkwayMinWidth_mm, 'mm')}
+          <strong>{t('status.walkway')}:</strong> {formatLength(evaluation.context.walkwayMinWidth_mm, 'mm')} —
+          {walkwayStatus.severity === null
+            ? ` ${t('status.walkwayClear')}`
+            : ` ${t('status.walkwayIssues', {
+                count: walkwayStatus.issues.length,
+                severity: t(`alerts.severity.${walkwayStatus.severity}`),
+              })}`}
         </span>
         <span>
           <IconMass /> {t('status.kpi.totalMass')}: {formatMass(mass.totalMass_kg)}
