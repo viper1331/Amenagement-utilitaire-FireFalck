@@ -1,0 +1,29 @@
+{
+  "$schemaVersion": "1.0.0",
+  "id": "vtu_trafic_l2h1_2025",
+  "label": "VTU – Renault Trafic (L2H1) 2025",
+  "maker": "Renault",
+  "family": "Trafic",
+  "variant": "L2H1",
+  "year": 2025,
+  "fuel": "diesel",
+  "gvw_kg": 3070,
+  "wheelbase_mm": 3498,
+  "overall": {
+    "length_mm": null,
+    "width_excl_mirrors_mm": null,
+    "height_mm": null
+  },
+  "interiorBox": {
+    "length_mm": 2937,
+    "width_mm": 1662,
+    "height_mm": 1387
+  },
+  "openings": {
+    "slidingDoor": { "width_mm": 1030, "height_mm": 1284 },
+    "rearDoor": { "width_mm": 1391, "height_mm": 1320 }
+  },
+  "axles": [],
+  "forbiddenZones": [],
+  "notes": "Dimensions utiles & ouvertures officielles; compléter 'overall' selon la finition exacte."
+}

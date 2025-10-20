@@ -1,0 +1,11 @@
+node_modules/
+dist/
+coverage/
+.DS_Store
+*.log
+.env
+.vscode/
+.playwright/
+.e2e-artifacts/
+e2e/test-results/
+.pnpm-store/
